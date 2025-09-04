@@ -262,6 +262,7 @@ footer {
 </footer>
 
 <script>
+// TAB SWITCH
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 tabButtons.forEach(btn => {
@@ -274,6 +275,7 @@ tabButtons.forEach(btn => {
   });
 });
 
+// COPY SCRIPT
 document.querySelectorAll('.copy').forEach(btn => {
   btn.addEventListener('click', () => {
     const code = btn.previousElementSibling.textContent;
@@ -283,6 +285,7 @@ document.querySelectorAll('.copy').forEach(btn => {
   });
 });
 
+// TOGGLE GAME DETAILS
 const gameItems = document.querySelectorAll('.game-item');
 gameItems.forEach(item => {
   item.addEventListener('click', e => {
@@ -293,6 +296,53 @@ gameItems.forEach(item => {
     if(!isActive) details.classList.add('active');
   });
 });
+
+// AUTO TRANSLATE IF NOT BRAZIL
+const userLang = navigator.language || navigator.userLanguage;
+
+function translateToEnglish() {
+  // Header
+  document.querySelector('.logo').innerText = 'LKZ Hub';
+  document.querySelector('nav button[data-tab="main"]').innerText = 'Main Script';
+  document.querySelector('nav button[data-tab="about"]').innerText = 'About';
+  document.querySelector('nav button[data-tab="games"]').innerText = 'Games';
+
+  // Main tab
+  const mainSection = document.getElementById('main');
+  mainSection.querySelector('h1').innerText = 'Main Script';
+  mainSection.querySelector('p').innerText = 'Run the main LKZ Hub script quickly and safely:';
+  mainSection.querySelector('pre code').innerText = 'loadstring(game:HttpGet("Just an example :)"))()';
+  mainSection.querySelector('button.copy').innerText = 'Copy script';
+
+  // About tab
+  const aboutSection = document.getElementById('about');
+  aboutSection.querySelector('h1').innerText = 'About';
+  aboutSection.querySelector('p').innerText = 'LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
+
+  // Games tab
+  const gamesSection = document.getElementById('games');
+  gamesSection.querySelector('h1').innerText = 'Supported Games';
+  const gameTitles = ['Steal a Brainrot', 'Grow a Garden', '99 Nights in the Forest'];
+  const gameItems = gamesSection.querySelectorAll('.game-item');
+  gameItems.forEach((item, index) => {
+    item.querySelector('.game-header h3').innerText = gameTitles[index];
+    const details = item.querySelectorAll('.game-details p');
+    details.forEach(p => {
+      p.innerHTML = p.innerHTML
+        .replace('Última atualização', 'Last update')
+        .replace('Status do script', 'Script status')
+        .replace('Notas', 'Notes')
+        .replace('Em desenvolvimento, disponível em breve.', 'In development, available soon.');
+    });
+  });
+
+  // Footer
+  document.querySelector('footer').innerText = 'LKZ Hub © 2025 — All rights reserved';
+}
+
+if (!userLang.includes('pt-BR')) {
+  translateToEnglish();
+}
 </script>
 
 </body>
