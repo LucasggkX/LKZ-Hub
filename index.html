@@ -237,72 +237,63 @@ footer {
 <script>
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
-    tabButtons.forEach(b => b.classList.remove('active'));
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=btn.dataset.tab;
+    tabButtons.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    tabContents.forEach(c => c.classList.remove('active'));
+    tabContents.forEach(c=>c.classList.remove('active'));
     document.getElementById(target).classList.add('active');
   });
 });
 
-document.querySelectorAll('.copy').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const code = btn.previousElementSibling.textContent;
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const code=btn.previousElementSibling.textContent;
     navigator.clipboard.writeText(code);
-    btn.innerText = 'Copiado! ✅';
-    setTimeout(() => btn.innerText = 'Copiar script', 2000);
+    btn.innerText='Copiado! ✅';
+    setTimeout(()=>btn.innerText='Copiar script',2000);
   });
 });
 
-const userLang = navigator.language || navigator.userLanguage;
-const texts = {
-  'pt-BR': { open: 'Abrir Status do script', close: 'Fechar Status do script' },
-  'en': { open: 'Open script status', close: 'Close script status' }
-};
-const lang = userLang.includes('pt-BR') ? 'pt-BR' : 'en';
+const userLang=navigator.language||navigator.userLanguage;
+const texts={ 'pt-BR': {open:'Abrir Status do script', close:'Fechar Status do script'}, 'en': {open:'Open script status', close:'Close script status'}};
+const lang=userLang.includes('pt-BR')?'pt-BR':'en';
 
-document.querySelectorAll('.toggle-details').forEach(btn => {
-  btn.addEventListener('click', e => {
+document.querySelectorAll('.toggle-details').forEach(btn=>{
+  btn.addEventListener('click',e=>{
     e.stopPropagation();
-    const details = btn.closest('.game-item').querySelector('.game-details');
-    const isActive = details.classList.contains('active');
-    document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.toggle-details').forEach(b => b.innerText = texts[lang].open);
-    if(!isActive){
-      details.classList.add('active');
-      btn.innerText = texts[lang].close;
-    }
+    const details=btn.closest('.game-item').querySelector('.game-details');
+    const isActive=details.classList.contains('active');
+    document.querySelectorAll('.game-details').forEach(d=>d.classList.remove('active'));
+    document.querySelectorAll('.toggle-details').forEach(b=>b.innerText=texts[lang].open);
+    if(!isActive){ details.classList.add('active'); btn.innerText=texts[lang].close; }
   });
 });
 
-function translateToEnglish() {
-  document.querySelector('.logo').innerText = 'LKZ Hub';
-  document.querySelector('nav button[data-tab="main"]').innerText = 'Main Script';
-  document.querySelector('nav button[data-tab="about"]').innerText = 'About';
-  document.querySelector('nav button[data-tab="games"]').innerText = 'Games';
-  const mainSection = document.getElementById('main');
-  mainSection.querySelector('h1').innerText = 'Main Script';
-  mainSection.querySelector('p').innerText = 'Run the main LKZ Hub script quickly and safely:';
-  mainSection.querySelector('button.copy').innerText = 'Copy script';
-  const aboutSection = document.getElementById('about');
-  aboutSection.querySelector('h1').innerText = 'About';
-  aboutSection.querySelector('p').innerText = 'LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
-  const gamesSection = document.getElementById('games');
-  gamesSection.querySelector('h1').innerText = 'Supported Games';
-  const gameTitles = ['Steal a Brainrot','Grow a Garden','99 Nights in the Forest'];
-  const gameItems = gamesSection.querySelectorAll('.game-item');
+function translateToEnglish(){
+  document.querySelector('.logo').innerText='LKZ Hub';
+  document.querySelector('nav button[data-tab="main"]').innerText='Main Script';
+  document.querySelector('nav button[data-tab="about"]').innerText='About';
+  document.querySelector('nav button[data-tab="games"]').innerText='Games';
+  const mainSection=document.getElementById('main');
+  mainSection.querySelector('h1').innerText='Main Script';
+  mainSection.querySelector('p').innerText='Run the main LKZ Hub script quickly and safely:';
+  mainSection.querySelector('button.copy').innerText='Copy script';
+  const aboutSection=document.getElementById('about');
+  aboutSection.querySelector('h1').innerText='About';
+  aboutSection.querySelector('p').innerText='LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
+  const gamesSection=document.getElementById('games');
+  gamesSection.querySelector('h1').innerText='Supported Games';
+  const gameTitles=['Steal a Brainrot','Grow a Garden','99 Nights in the Forest'];
+  const gameItems=gamesSection.querySelectorAll('.game-item');
   gameItems.forEach((item,index)=>{
-    item.querySelector('.game-header h3').innerText = gameTitles[index];
-    const details = item.querySelectorAll('.game-details p');
+    item.querySelector('.game-header h3').innerText=gameTitles[index];
+    const details=item.querySelectorAll('.game-details p');
     details.forEach(p=>{
-      p.innerHTML=p.innerHTML
-        .replace('Última atualização','Last update')
-        .replace('Status do script','Script status')
-        .replace('Notas','Notes');
+      p.innerHTML=p.innerHTML.replace('Última atualização','Last update').replace('Status do script','Script status').replace('Notas','Notes');
     });
-    item.querySelector('.toggle-details').innerText = texts['en'].open;
+    item.querySelector('.toggle-details').innerText=texts['en'].open;
   });
   document.querySelector('footer').innerText='LKZ Hub © 2025 — All rights reserved';
 }
