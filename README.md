@@ -1,1 +1,1 @@
-(Lkz site)[https://lucasggkx.github.io/LKZ-Hub/]
+# [Lkz site](https://lucasggkx.github.io/LKZ-Hub/)
