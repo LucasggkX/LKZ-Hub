@@ -5,150 +5,181 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LKZ Hub</title>
 <style>
-  body {
-    margin:0;
-    font-family:'Arial',sans-serif;
-    background:#f4f4f9;
-    color:#333;
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #f4f4f9;
+  color: #333;
+}
+
+header {
+  background: #fff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav button {
+  padding: 10px 20px;
+  border: none;
+  background: #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav button.active {
+  background: #333;
+  color: #fff;
+}
+
+nav button:hover:not(.active) {
+  background: #ddd;
+}
+
+main {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+section.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+section.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  header {
-    background:#fff;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #ddd;
-    position:sticky;
-    top:0;
-    z-index:100;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .logo {
-    font-size:1.8rem;
-    font-weight:bold;
-    color:#222;
-  }
-  nav {
-    display:flex;
-    gap:20px;
-  }
-  nav button {
-    padding:10px 20px;
-    border:none;
-    background:#eee;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
-  }
-  nav button.active {
-    background:#333;
-    color:#fff;
-  }
-  nav button:hover:not(.active) {
-    background:#ddd;
-  }
-  main {
-    max-width:1000px;
-    margin:40px auto;
-    padding:0 20px;
-  }
-  section.tab-content {
-    display:none;
-    animation:fadeIn 0.3s ease-in-out;
-  }
-  section.tab-content.active {
-    display:block;
-  }
-  @keyframes fadeIn {
-    from{opacity:0;transform:translateY(10px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  h1 {
-    font-size:2.5rem;
-    margin-bottom:10px;
-  }
-  p {
-    line-height:1.6;
-    margin-bottom:20px;
-  }
-  pre {
-    background:#f0f0f0;
-    padding:20px;
-    border-radius:10px;
-    overflow-x:auto;
-  }
-  button.copy {
-    margin-top:10px;
-    padding:10px 15px;
-    background:#333;
-    color:#fff;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  button.copy:hover {
-    background:#555;
-  }
-  .games-list {
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-  }
-  .game-item {
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    transition:0.3s;
-    cursor:pointer;
-  }
-  .game-item:hover {
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-  }
-  .game-header {
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:10px;
-  }
-  .game-header img {
-    width:80px;
-    height:60px;
-    object-fit:cover;
-    border-radius:8px;
-  }
-  .game-header h3 {
-    margin:0;
-    font-size:1.2rem;
-  }
-  .game-header p {
-    margin:0;
-    color:#666;
-    font-size:0.9rem;
-  }
-  .game-details {
-    max-height:0;
-    overflow:hidden;
-    background:#f9f9f9;
-    padding:0 15px;
-    border-top:1px solid #ddd;
-    font-size:0.95rem;
-    color:#444;
-    transition:max-height 0.3s ease,padding 0.3s ease;
-  }
-  .game-details.active {
-    max-height:200px;
-    padding:15px;
-  }
-  footer {
-    text-align:center;
-    padding:20px;
-    color:#777;
-    border-top:1px solid #ddd;
-    margin-top:50px;
-  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+pre {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+button.copy {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.copy:hover {
+  background: #555;
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.game-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.game-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+.game-header img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.game-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.game-header p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.game-details {
+  max-height: 0;
+  overflow: hidden;
+  background: #f9f9f9;
+  padding: 0 15px;
+  border-top: 1px solid #ddd;
+  font-size: 0.95rem;
+  color: #444;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.game-details.active {
+  max-height: 1000px;
+  padding: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  border-top: 1px solid #ddd;
+  margin-top: 50px;
+}
 </style>
 </head>
 <body>
@@ -231,201 +262,37 @@
 </footer>
 
 <script>
-  const tabButtons=document.querySelectorAll('.tab-btn')
-  const tabContents=document.querySelectorAll('.tab-content')
-  tabButtons.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const target=btn.dataset.tab
-      tabButtons.forEach(b=>b.classList.remove('active'))
-      btn.classList.add('active')
-      tabContents.forEach(c=>c.classList.remove('active'))
-      document.getElementById(target).classList.add('active')
-    })
-  })
-  document.querySelectorAll('.copy').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const code=btn.previousElementSibling.innerText
-      navigator.clipboard.writeText(code)
-      btn.innerText='Copiado! ✅'
-      setTimeout(()=>btn.innerText='Copiar script',2000)
-    })
-  })
-  const gameItems=document.querySelectorAll('.game-item')
-  gameItems.forEach(item=>{
-    item.addEventListener('click',()=>{
-      const details=item.querySelector('.game-details')
-      const isActive=details.classList.contains('active')
-      document.querySelectorAll('.game-details').forEach(d=>d.classList.remove('active'))
-      if(!isActive)details.classList.add('active')
-    })
-  })
-</script>
-
-</body>
-</html>
-  section.tab-content.active {
-    display:block;
-  }
-
-  @keyframes fadeIn {
-    from {opacity:0; transform: translateY(10px);}
-    to {opacity:1; transform: translateY(0);}
-  }
-
-  h1 {
-    font-size:2.5rem;
-    margin-bottom:10px;
-  }
-
-  p {
-    line-height:1.6;
-    margin-bottom:20px;
-  }
-
-  pre {
-    background:#f0f0f0;
-    padding:20px;
-    border-radius:10px;
-    overflow-x:auto;
-  }
-
-  button.copy {
-    margin-top:10px;
-    padding:10px 15px;
-    background:#333;
-    color:#fff;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
-  }
-
-  button.copy:hover {
-    background:#555;
-  }
-
-  .games-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-    gap:20px;
-  }
-
-  .game-card {
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    overflow:hidden;
-    text-align:center;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    transition:0.3s;
-  }
-
-  .game-card:hover {
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  .game-card img {
-    width:100%;
-    height:140px;
-    object-fit:cover;
-  }
-
-  .game-card h3 {
-    margin:10px 0 5px;
-  }
-
-  .game-card p {
-    color:#666;
-    margin-bottom:10px;
-    font-size:0.9rem;
-  }
-
-  footer {
-    text-align:center;
-    padding:20px;
-    color:#777;
-    border-top:1px solid #ddd;
-    margin-top:50px;
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo">LKZ Hub</div>
-  <nav>
-    <button class="tab-btn active" data-tab="main">Main Script</button>
-    <button class="tab-btn" data-tab="about">Sobre</button>
-    <button class="tab-btn" data-tab="games">Games</button>
-  </nav>
-</header>
-
-<main>
-  <section id="main" class="tab-content active">
-    <h1>Main Script</h1>
-    <p>Execute o script principal do LKZ Hub de forma rápida e segura:</p>
-    <pre><code>loadstring(game:HttpGet("Apenas exemplo :)"))()</code></pre>
-    <button class="copy">Copiar script</button>
-  </section>
-
-  <section id="about" class="tab-content">
-    <h1>Sobre</h1>
-    <p>O LKZ Hub oferece scripts confiáveis e atualizados para Roblox, ajudando a melhorar sua experiência de jogo de maneira prática e segura.</p>
-  </section>
-
-  <section id="games" class="tab-content">
-    <h1>Games Suportados</h1>
-    <div class="games-grid">
-      <div class="game-card">
-        <img src="https://tr.rbxcdn.com/180DAY-bfcc710b1a232b34e2d3b40f963f8cde/768/432/Image/Webp/noFilter" alt="">
-        <h3>Steal a Brainrot</h3>
-        <p>Desativado</p>
-      </div>
-      <div class="game-card">
-        <img src="https://tr.rbxcdn.com/180DAY-e4f6bc7ad2591782a0935f8244d78342/768/432/Image/Webp/noFilter" alt="">
-        <h3>Grow a Garden</h3>
-        <p>Desativado</p>
-      </div>
-      <div class="game-card">
-        <img src="https://tr.rbxcdn.com/180DAY-643b9b9285f3bd9b63cf392db12a4d87/768/432/Image/Webp/noFilter" alt="">
-        <h3>99 Nights in the Forest</h3>
-        <p>Desativado</p>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  LKZ Hub © 2025 — Todos os direitos reservados
-</footer>
-
-<script>
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      tabContents.forEach(c => {
-        c.classList.remove('active');
-      });
-
-      document.getElementById(target).classList.add('active');
-    });
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    tabContents.forEach(c => c.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
   });
+});
 
-  document.querySelectorAll('.copy').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const code = btn.previousElementSibling.innerText;
-      navigator.clipboard.writeText(code);
-      btn.innerText = 'Copiado! ✅';
-      setTimeout(() => btn.innerText = 'Copiar script', 2000);
-    });
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code);
+    btn.innerText = 'Copiado! ✅';
+    setTimeout(() => btn.innerText = 'Copiar script', 2000);
   });
+});
+
+const gameItems = document.querySelectorAll('.game-item');
+gameItems.forEach(item => {
+  item.addEventListener('click', e => {
+    if(e.target.closest('.game-details')) return;
+    const details = item.querySelector('.game-details');
+    const isActive = details.classList.contains('active');
+    document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
+    if(!isActive) details.classList.add('active');
+  });
+});
 </script>
 
 </body>
