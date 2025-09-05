@@ -144,6 +144,14 @@ button.copy:hover {
   max-height: 1000px;
   padding: 15px;
 }
+.status-list {
+  list-style: none;
+  padding: 0;
+}
+.status-list li {
+  font-size: 1rem;
+  margin: 6px 0;
+}
 footer {
   text-align: center;
   padding: 20px;
@@ -168,9 +176,11 @@ footer {
   <section id="main" class="tab-content active">
     <h1>Main Script</h1>
     <p>Execute o script principal do LKZ Hub de forma rápida e segura! </p>
-    <h2>script status:</h2> 
-    <p>Steal a Brainrot | 🔴</p>
-    <p>99 Nights In The Forest | 🟢</p>
+    <h2>Status dos Scripts:</h2> 
+    <ul class="status-list">
+      <li>🟢 <strong>99 Nights in the Forest</strong> — Ativo</li>
+      <li>🔴 <strong>Steal a Brainrot</strong> — Offline</li>
+    </ul>
     
     <pre><code>Wait...</code></pre>
     <button class="copy">Copiar script</button>
@@ -202,21 +212,6 @@ footer {
 
       <div class="game-item">
         <div class="game-header">
-          <img src="https://tr.rbxcdn.com/180DAY-e4f6bc7ad2591782a0935f8244d78342/768/432/Image/Webp/noFilter" alt="">
-          <div>
-            <h3>Grow a Garden</h3>
-            <button class="toggle-details">Abrir Status do script</button>
-          </div>
-        </div>
-        <div class="game-details">
-          <p><strong>Última atualização:</strong> 03/09/2025</p>
-          <p><strong>Status do script:</strong> em desenvolvimento</p>
-          <p><strong>Notas:</strong> Em desenvolvimento, disponível em breve.</p>
-        </div>
-      </div>
-
-      <div class="game-item">
-        <div class="game-header">
           <img src="https://tr.rbxcdn.com/180DAY-643b9b9285f3bd9b63cf392db12a4d87/768/432/Image/Webp/noFilter" alt="">
           <div>
             <h3>99 Nights in the Forest</h3>
@@ -226,7 +221,7 @@ footer {
         <div class="game-details">
           <p><strong>Última atualização:</strong> 05/09/2025</p>
           <p><strong>Status do script:</strong> Ativo</p>
-          <p><strong>Notas:</strong> Em desenvolvimento, Algumas funções pode não funcionar</p>
+          <p><strong>Notas:</strong> Em desenvolvimento, Algumas funções podem não funcionar.</p>
         </div>
       </div>
 
@@ -289,7 +284,7 @@ function translateToEnglish(){
   aboutSection.querySelector('p').innerText='LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
   const gamesSection=document.getElementById('games');
   gamesSection.querySelector('h1').innerText='Supported Games';
-  const gameTitles=['Steal a Brainrot','Grow a Garden','99 Nights in the Forest'];
+  const gameTitles=['Steal a Brainrot','99 Nights in the Forest'];
   const gameItems=gamesSection.querySelectorAll('.game-item');
   gameItems.forEach((item,index)=>{
     item.querySelector('.game-header h3').innerText=gameTitles[index];
