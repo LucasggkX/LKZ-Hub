@@ -1,3 +1,10 @@
+-- Ignore this post, and just for the api to count how many executions the script has had :) 
+request({
+    Url = "https://67747f8e-0ad3-4bd3-b6e8-781403367ce0-00-15di0w90h53f1.kirk.replit.dev/add",
+    Method = "POST"
+})
+-- Ignore this post, and just for the api to count how many executions the script has had :) 
+
 local id = game.PlaceId 
 local raw
 
