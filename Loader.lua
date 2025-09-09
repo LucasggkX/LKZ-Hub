@@ -1,3 +1,9 @@
+_G.exec = false
+if _G.exec then
+  return
+end
+_G.exec = true
+
 local id = game.PlaceId 
 local raw
 
