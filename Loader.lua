@@ -1,4 +1,3 @@
-_G.exec = false
 if _G.exec then
   return
 end
