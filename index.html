@@ -178,7 +178,7 @@ footer {
     <p>Execute o script principal do LKZ Hub de forma rápida e segura! </p>
     <h2>Status dos Scripts:</h2> 
     <ul class="status-list" id="status-list">
-      <li>🟡 <strong>Steal a Brainrot</strong> — Atualizando</li>
+      <li>🟡 <strong>Steal a Brainrot</strong> — Atualizando (corrigindo bugs)</li>
       <li>🟢 <strong>99 Nights in the Forest</strong> — Ativo</li>
     </ul>
     
@@ -205,7 +205,7 @@ footer {
         </div>
         <div class="game-details">
           <p><strong>Última atualização:</strong> 08/09/2025</p>
-          <p><strong>Status do script:</strong> Ativo</p>
+          <p><strong>Status do script:</strong> Atualizando (corrigindo bugs)</p>
           <p><strong>Notas:</strong> Em desenvolvimento, Algumas funções podem não funcionar.</p>
         </div>
       </div>
@@ -245,7 +245,6 @@ tabButtons.forEach(btn=>{
     document.getElementById(target).classList.add('active');
   });
 });
-
 document.querySelectorAll('.copy').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const code=btn.previousElementSibling.textContent;
@@ -254,7 +253,6 @@ document.querySelectorAll('.copy').forEach(btn=>{
     setTimeout(()=>btn.innerText='Copiar script',2000);
   });
 });
-
 const userLang=navigator.language||navigator.userLanguage;
 const texts={ 
   'pt-BR': {
@@ -262,18 +260,19 @@ const texts={
     close:'Fechar Status do script',
     active:'Ativo',
     offline:'Offline',
-    dev:'Em desenvolvimento'
+    dev:'Em desenvolvimento',
+    updating:'Atualizando (corrigindo bugs)'
   }, 
   'en': {
     open:'Open script status',
     close:'Close script status',
     active:'Active',
     offline:'Offline',
-    dev:'In development'
+    dev:'In development',
+    updating:'Updating (fixing bugs)'
   }
 };
 const lang=userLang.includes('pt-BR')?'pt-BR':'en';
-
 document.querySelectorAll('.toggle-details').forEach(btn=>{
   btn.addEventListener('click',e=>{
     e.stopPropagation();
@@ -284,31 +283,25 @@ document.querySelectorAll('.toggle-details').forEach(btn=>{
     if(!isActive){ details.classList.add('active'); btn.innerText=texts[lang].close; }
   });
 });
-
 function translateToEnglish(){
   document.querySelector('.logo').innerText='LKZ Hub';
   document.querySelector('nav button[data-tab="main"]').innerText='Main Script';
   document.querySelector('nav button[data-tab="about"]').innerText='About';
   document.querySelector('nav button[data-tab="games"]').innerText='Games';
-
   const mainSection=document.getElementById('main');
   mainSection.querySelector('h1').innerText='Main Script';
   mainSection.querySelector('p').innerText='Run the main LKZ Hub script quickly and safely:';
   mainSection.querySelector('button.copy').innerText='Copy script';
-
   mainSection.querySelector('h2').innerText='Script Status:';
   document.getElementById('status-list').innerHTML = `
-    <li>🟡 <strong>Steal a Brainrot</strong> — ${texts['en'].active}</li>
+    <li>🟡 <strong>Steal a Brainrot</strong> — ${texts['en'].updating}</li>
     <li>🟢 <strong>99 Nights in the Forest</strong> — ${texts['en'].active}</li>
   `;
-
   const aboutSection=document.getElementById('about');
   aboutSection.querySelector('h1').innerText='About';
   aboutSection.querySelector('p').innerText='LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
-
   const gamesSection=document.getElementById('games');
   gamesSection.querySelector('h1').innerText='Supported Games';
-
   const gameTitles=['Steal a Brainrot','99 Nights in the Forest'];
   const gameItems=gamesSection.querySelectorAll('.game-item');
   gameItems.forEach((item,index)=>{
@@ -320,14 +313,13 @@ function translateToEnglish(){
         .replace('Status do script','Script status')
         .replace('Notas','Notes')
         .replace('Em desenvolvimento', texts['en'].dev)
-        .replace('Ativo', texts['en'].active);
+        .replace('Ativo', texts['en'].active)
+        .replace('Atualizando (corrigindo bugs)', texts['en'].updating);
     });
     item.querySelector('.toggle-details').innerText=texts['en'].open;
   });
-
   document.querySelector('footer').innerText='LKZ Hub © 2025 — All rights reserved';
 }
-
 if(!userLang.includes('pt-BR')) translateToEnglish();
 </script>
 
