@@ -355,10 +355,10 @@ document.querySelectorAll('.toggle-details').forEach(btn => {
   });
 });
 setInterval(() => {
-  fetch('https://api.allorigins.win/raw?url=https://api.counterapi.dev/v2/lkz/lkz-hub/')
+  fetch('https://api.counterapi.dev/v2/lkz/lkz-hub/up_count')
     .then(r => r.json())
     .then(d => {
-      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count}`;
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.value}`;
     })
     .catch(() => {
       document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
