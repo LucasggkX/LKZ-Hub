@@ -355,10 +355,10 @@ document.querySelectorAll('.toggle-details').forEach(btn => {
   });
 });
 setInterval(() => {
-  fetch('https://api.counterapi.dev/v2/lkz/lkz-hub/up_count')
+  fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
     .then(r => r.json())
     .then(d => {
-      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.value}`;
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count}`;
     })
     .catch(() => {
       document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
