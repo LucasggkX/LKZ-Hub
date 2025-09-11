@@ -84,6 +84,22 @@ button.copy {
 button.copy:hover {
   background: #555;
 }
+.executions-btn {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.executions-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
+}
 .games-list {
   display: flex;
   flex-direction: column;
@@ -164,73 +180,65 @@ footer {
 <body>
 
 <header>
-  <div class="logo">LKZ Hub</div>
+  <div class="logo" data-key="logo">LKZ Hub</div>
   <nav>
-    <button class="tab-btn active" data-tab="main">Main Script</button>
-    <button class="tab-btn" data-tab="about">Sobre</button>
-    <button class="tab-btn" data-tab="games">Games</button>
+    <button class="tab-btn active" data-tab="main" data-key="mainTab">Main Script</button>
+    <button class="tab-btn" data-tab="about" data-key="aboutTab">Sobre</button>
+    <button class="tab-btn" data-tab="games" data-key="gamesTab">Games</button>
   </nav>
 </header>
 
 <main>
   <section id="main" class="tab-content active">
-    <h1>Main Script</h1>
-    <p>Execute o script principal do LKZ Hub de forma rápida e segura! </p>
-    <h2>Status dos Scripts:</h2> 
+    <h1 data-key="mainHeading">Main Script</h1>
+    <p data-key="mainDescription">Execute o script principal do LKZ Hub de forma rápida e segura! </p>
+    <h2 data-key="statusHeading">Status dos Scripts:</h2> 
     <ul class="status-list" id="status-list">
-      <li>🟡 <strong>Steal a Brainrot</strong> — Atualizando (corrigindo bugs)</li>
-      <li>🟢 <strong>99 Nights in the Forest</strong> — Ativo</li>
+      <li data-key="stealStatus">🟡 <strong>Steal a Brainrot</strong> — Atualizando (corrigindo bugs)</li>
+      <li data-key="nightsStatus">🟢 <strong>99 Nights in the Forest</strong> — Ativo</li>
     </ul>
     
     <pre><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/LKZ-Hub/refs/heads/main/Loader.lua"))()</code></pre>
-    <button class="copy">Copiar script</button>
-    <button id="execBtn">Executions: </button>
-<script>
-setInterval(()=>{
-  fetch('https://api.counterapi.dev/v1/Lkz/LKZ-Hub/')
-    .then(r=>r.json())
-    .then(d=>document.getElementById('execBtn').innerText=`Executions: ${d.count}`)
-    .catch(()=>document.getElementById('execBtn').innerText='Executions: ?')
-},1000)
-</script>
+    <button class="copy" data-key="copyButton">Copiar script</button>
+    <button class="executions-btn" id="execBtn" data-key="executionsBtn">Executions: ?</button>
   </section>
 
   <section id="about" class="tab-content">
-    <h1>Sobre</h1>
-    <p>O LKZ Hub oferece scripts confiáveis e atualizados para Roblox, ajudando a melhorar sua experiência de jogo de maneira prática e segura.</p>
+    <h1 data-key="aboutHeading">Sobre</h1>
+    <p data-key="aboutDescription">O LKZ Hub oferece scripts confiáveis e atualizados para Roblox, ajudando a melhorar sua experiência de jogo de maneira prática e segura.</p>
   </section>
 
   <section id="games" class="tab-content">
-    <h1>Games Suportados</h1>
+    <h1 data-key="gamesHeading">Games Suportados</h1>
     <div class="games-list">
 
       <div class="game-item">
         <div class="game-header">
-          <img src="https://tr.rbxcdn.com/180DAY-bfcc710b1a232b34e2d3b40f963f8cde/768/432/Image/Webp/noFilter" alt="">
+          <img src="https://tr.rbxcdn.com/180DAY-bfcc710b1a232b34e2d3b40f963f8cde/768/432/Image/Webp/noFilter" alt="Steal a Brainrot">
           <div>
             <h3>Steal a Brainrot</h3>
-            <button class="toggle-details">Abrir Status do script</button>
+            <button class="toggle-details" data-key="openStatusBtn">Abrir Status do script</button>
           </div>
         </div>
         <div class="game-details">
-          <p><strong>Última atualização:</strong> 08/09/2025</p>
-          <p><strong>Status do script:</strong> Atualizando (corrigindo bugs)</p>
-          <p><strong>Notas:</strong> Em desenvolvimento, Algumas funções podem não funcionar.</p>
+          <p><strong data-key="lastUpdateLabel">Última atualização:</strong> 08/09/2025</p>
+          <p><strong data-key="scriptStatusLabel">Status do script:</strong> <span data-key="stealStatusDetail">Atualizando (corrigindo bugs)</span></p>
+          <p><strong data-key="notesLabel">Notas:</strong> <span data-key="stealNotes">Em desenvolvimento, Algumas funções podem não funcionar.</span></p>
         </div>
       </div>
 
       <div class="game-item">
         <div class="game-header">
-          <img src="https://tr.rbxcdn.com/180DAY-643b9b9285f3bd9b63cf392db12a4d87/768/432/Image/Webp/noFilter" alt="">
+          <img src="https://tr.rbxcdn.com/180DAY-643b9b9285f3bd9b63cf392db12a4d87/768/432/Image/Webp/noFilter" alt="99 Nights in the Forest">
           <div>
             <h3>99 Nights in the Forest</h3>
-            <button class="toggle-details">Abrir Status do script</button>
+            <button class="toggle-details" data-key="openStatusBtn">Abrir Status do script</button>
           </div>
         </div>
         <div class="game-details">
-          <p><strong>Última atualização:</strong> 05/09/2025</p>
-          <p><strong>Status do script:</strong> Ativo</p>
-          <p><strong>Notas:</strong> Em desenvolvimento, Algumas funções podem não funcionar.</p>
+          <p><strong data-key="lastUpdateLabel">Última atualização:</strong> 05/09/2025</p>
+          <p><strong data-key="scriptStatusLabel">Status do script:</strong> <span data-key="nightsStatusDetail">Ativo</span></p>
+          <p><strong data-key="notesLabel">Notas:</strong> <span data-key="nightsNotes">Em desenvolvimento, Algumas funções podem não funcionar.</span></p>
         </div>
       </div>
 
@@ -239,97 +247,123 @@ setInterval(()=>{
 </main>
 
 <footer>
-  LKZ Hub © 2025 — Todos os direitos reservados
+  <span data-key="footerText">LKZ Hub © 2025 — Todos os direitos reservados</span>
 </footer>
 
 <script>
+const translations = {
+  'pt-BR': {
+    logo: 'LKZ Hub',
+    mainTab: 'Main Script',
+    aboutTab: 'Sobre',
+    gamesTab: 'Games',
+    mainHeading: 'Main Script',
+    mainDescription: 'Execute o script principal do LKZ Hub de forma rápida e segura!',
+    statusHeading: 'Status dos Scripts:',
+    stealStatus: '🟡 <strong>Steal a Brainrot</strong> — Atualizando (corrigindo bugs)',
+    nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
+    copyButton: 'Copiar script',
+    executionsBtn: 'Executions: ?',
+    aboutHeading: 'Sobre',
+    aboutDescription: 'O LKZ Hub oferece scripts confiáveis e atualizados para Roblox, ajudando a melhorar sua experiência de jogo de maneira prática e segura.',
+    gamesHeading: 'Games Suportados',
+    openStatusBtn: 'Abrir Status do script',
+    closeStatusBtn: 'Fechar Status do script',
+    lastUpdateLabel: 'Última atualização:',
+    scriptStatusLabel: 'Status do script:',
+    notesLabel: 'Notas:',
+    stealStatusDetail: 'Atualizando (corrigindo bugs)',
+    nightsStatusDetail: 'Ativo',
+    stealNotes: 'Em desenvolvimento, Algumas funções podem não funcionar.',
+    nightsNotes: 'Em desenvolvimento, Algumas funções podem não funcionar.',
+    footerText: 'LKZ Hub © 2025 — Todos os direitos reservados'
+  },
+  'en': {
+    logo: 'LKZ Hub',
+    mainTab: 'Main Script',
+    aboutTab: 'About',
+    gamesTab: 'Games',
+    mainHeading: 'Main Script',
+    mainDescription: 'Run the main LKZ Hub script quickly and safely!',
+    statusHeading: 'Script Status:',
+    stealStatus: '🟡 <strong>Steal a Brainrot</strong> — Updating (fixing bugs)',
+    nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
+    copyButton: 'Copy script',
+    executionsBtn: 'Executions: ?',
+    aboutHeading: 'About',
+    aboutDescription: 'LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.',
+    gamesHeading: 'Supported Games',
+    openStatusBtn: 'Open script status',
+    closeStatusBtn: 'Close script status',
+    lastUpdateLabel: 'Last update:',
+    scriptStatusLabel: 'Script status:',
+    notesLabel: 'Notes:',
+    stealStatusDetail: 'Updating (fixing bugs)',
+    nightsStatusDetail: 'Active',
+    stealNotes: 'In development, Some features may not work.',
+    nightsNotes: 'In development, Some features may not work.',
+    footerText: 'LKZ Hub © 2025 — All rights reserved'
+  }
+};
+function applyTranslations(lang) {
+  const currentTranslations = translations[lang];
+  document.querySelectorAll('[data-key]').forEach(element => {
+    const key = element.dataset.key;
+    if (currentTranslations[key]) {
+      if (element.tagName === 'BUTTON' || element.tagName === 'H3') {
+        element.innerText = currentTranslations[key];
+      } else {
+        element.innerHTML = currentTranslations[key];
+      }
+    }
+  });
+}
+const userLang = navigator.language.startsWith('pt') ? 'pt-BR' : 'en';
+if (userLang === 'en') {
+  applyTranslations('en');
+}
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
-tabButtons.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const target=btn.dataset.tab;
-    tabButtons.forEach(b=>b.classList.remove('active'));
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    tabContents.forEach(c=>c.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
     document.getElementById(target).classList.add('active');
   });
 });
-document.querySelectorAll('.copy').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const code=btn.previousElementSibling.textContent;
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.previousElementSibling.textContent;
     navigator.clipboard.writeText(code);
-    btn.innerText='Copiado! ✅';
-    setTimeout(()=>btn.innerText='Copiar script',2000);
+    btn.innerText = userLang === 'pt-BR' ? 'Copiado! ✅' : 'Copied! ✅';
+    setTimeout(() => btn.innerText = translations[userLang].copyButton, 2000);
   });
 });
-const userLang=navigator.language||navigator.userLanguage;
-const texts={ 
-  'pt-BR': {
-    open:'Abrir Status do script',
-    close:'Fechar Status do script',
-    active:'Ativo',
-    offline:'Offline',
-    dev:'Em desenvolvimento',
-    updating:'Atualizando (corrigindo bugs)'
-  }, 
-  'en': {
-    open:'Open script status',
-    close:'Close script status',
-    active:'Active',
-    offline:'Offline',
-    dev:'In development',
-    updating:'Updating (fixing bugs)'
-  }
-};
-const lang=userLang.includes('pt-BR')?'pt-BR':'en';
-document.querySelectorAll('.toggle-details').forEach(btn=>{
-  btn.addEventListener('click',e=>{
+document.querySelectorAll('.toggle-details').forEach(btn => {
+  btn.addEventListener('click', e => {
     e.stopPropagation();
-    const details=btn.closest('.game-item').querySelector('.game-details');
-    const isActive=details.classList.contains('active');
-    document.querySelectorAll('.game-details').forEach(d=>d.classList.remove('active'));
-    document.querySelectorAll('.toggle-details').forEach(b=>b.innerText=texts[lang].open);
-    if(!isActive){ details.classList.add('active'); btn.innerText=texts[lang].close; }
+    const details = btn.closest('.game-item').querySelector('.game-details');
+    const isActive = details.classList.contains('active');
+    document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.toggle-details').forEach(b => b.innerText = translations[userLang].openStatusBtn);
+    if (!isActive) {
+      details.classList.add('active');
+      btn.innerText = translations[userLang].closeStatusBtn;
+    }
   });
 });
-function translateToEnglish(){
-  document.querySelector('.logo').innerText='LKZ Hub';
-  document.querySelector('nav button[data-tab="main"]').innerText='Main Script';
-  document.querySelector('nav button[data-tab="about"]').innerText='About';
-  document.querySelector('nav button[data-tab="games"]').innerText='Games';
-  const mainSection=document.getElementById('main');
-  mainSection.querySelector('h1').innerText='Main Script';
-  mainSection.querySelector('p').innerText='Run the main LKZ Hub script quickly and safely:';
-  mainSection.querySelector('button.copy').innerText='Copy script';
-  mainSection.querySelector('h2').innerText='Script Status:';
-  document.getElementById('status-list').innerHTML = `
-    <li>🟡 <strong>Steal a Brainrot</strong> — ${texts['en'].updating}</li>
-    <li>🟢 <strong>99 Nights in the Forest</strong> — ${texts['en'].active}</li>
-  `;
-  const aboutSection=document.getElementById('about');
-  aboutSection.querySelector('h1').innerText='About';
-  aboutSection.querySelector('p').innerText='LKZ Hub offers reliable and updated Roblox scripts to improve your gaming experience quickly and safely.';
-  const gamesSection=document.getElementById('games');
-  gamesSection.querySelector('h1').innerText='Supported Games';
-  const gameTitles=['Steal a Brainrot','99 Nights in the Forest'];
-  const gameItems=gamesSection.querySelectorAll('.game-item');
-  gameItems.forEach((item,index)=>{
-    item.querySelector('.game-header h3').innerText=gameTitles[index];
-    const details=item.querySelectorAll('.game-details p');
-    details.forEach(p=>{
-      p.innerHTML=p.innerHTML
-        .replace('Última atualização','Last update')
-        .replace('Status do script','Script status')
-        .replace('Notas','Notes')
-        .replace('Em desenvolvimento', texts['en'].dev)
-        .replace('Ativo', texts['en'].active)
-        .replace('Atualizando (corrigindo bugs)', texts['en'].updating);
+setInterval(() => {
+  fetch('https://api.allorigins.win/raw?url=https://api.counterapi.dev/v2/lkz/lkz-hub/')
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count}`;
+    })
+    .catch(() => {
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
     });
-    item.querySelector('.toggle-details').innerText=texts['en'].open;
-  });
-  document.querySelector('footer').innerText='LKZ Hub © 2025 — All rights reserved';
-}
-if(!userLang.includes('pt-BR')) translateToEnglish();
+}, 2000);
 </script>
 
 </body>
