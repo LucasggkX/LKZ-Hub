@@ -358,7 +358,7 @@ setInterval(() => {
   fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
     .then(r => r.json())
     .then(d => {
-      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count}`;
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count / 2}`;
     })
     .catch(() => {
       document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
