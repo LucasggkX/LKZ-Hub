@@ -1,6 +1,6 @@
 if _G.exec then return end _G.exec = true
 local id = game.PlaceId; local raw
-function Add() print("Updated count: "..game:GetService("HttpService"):JSONDecode(request({Url="https://api.counterapi.dev/v1/Lkz/LKZ-Hub/up", Method="GET"}).Body).count) end
+function Add() request({Url="https://api.counterapi.dev/v2/Lkz/LKZ-Hub/up", Method="POST"}) end
 
 if id == 126509999114328 then
   
