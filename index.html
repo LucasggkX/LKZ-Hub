@@ -194,7 +194,7 @@ footer {
     <p data-key="mainDescription">Execute o script principal do LKZ Hub de forma rápida e segura! </p>
     <h2 data-key="statusHeading">Status dos Scripts:</h2> 
     <ul class="status-list" id="status-list">
-      <li data-key="stealStatus">🟡 <strong>Steal a Brainrot</strong> — Versão improvisada</li>
+      <li data-key="stealStatus">🟢 <strong>Steal a Brainrot</strong> — Ativo</li>
       <li data-key="nightsStatus">🟢 <strong>99 Nights in the Forest</strong> — Ativo</li>
     </ul>
     
@@ -222,7 +222,7 @@ footer {
         </div>
         <div class="game-details">
           <p><strong data-key="lastUpdateLabel">Última atualização:</strong> 12/09/2025</p>
-          <p><strong data-key="scriptStatusLabel">Status do script:</strong> <span data-key="stealStatusDetail">Versão improvisada</span></p>
+          <p><strong data-key="scriptStatusLabel">Status do script:</strong> <span data-key="stealStatusDetail">Ativo</span></p>
           <p><strong data-key="notesLabel">Notas:</strong> <span data-key="stealNotes">Versão improvisada, espere para a principal.</span></p>
         </div>
       </div>
@@ -260,7 +260,7 @@ const translations = {
     mainHeading: 'Main Script',
     mainDescription: 'Execute o script principal do LKZ Hub de forma rápida e segura!',
     statusHeading: 'Status dos Scripts:',
-    stealStatus: '🟡 <strong>Steal a Brainrot</strong> — Versão improvisada',
+    stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Ativo',
     nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
     copyButton: 'Copiar script',
     executionsBtn: 'Executions: ?',
@@ -272,7 +272,7 @@ const translations = {
     lastUpdateLabel: 'Última atualização:',
     scriptStatusLabel: 'Status do script:',
     notesLabel: 'Notas:',
-    stealStatusDetail: 'Versão improvisada',
+    stealStatusDetail: 'Ativo',
     nightsStatusDetail: 'Ativo',
     stealNotes: 'Versão improvisada, espere para a principal.',
     nightsNotes: 'Em desenvolvimento, Algumas funções podem não funcionar.',
@@ -286,7 +286,7 @@ const translations = {
     mainHeading: 'Main Script',
     mainDescription: 'Run the main LKZ Hub script quickly and safely!',
     statusHeading: 'Script Status:',
-    stealStatus: '🟡 <strong>Steal a Brainrot</strong> — Improvised version',
+    stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Active',
     nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
     copyButton: 'Copy script',
     executionsBtn: 'Executions: ?',
@@ -298,7 +298,7 @@ const translations = {
     lastUpdateLabel: 'Last update:',
     scriptStatusLabel: 'Script status:',
     notesLabel: 'Notes:',
-    stealStatusDetail: 'Improvised version',
+    stealStatusDetail: 'Active',
     nightsStatusDetail: 'Active',
     stealNotes: 'Improvised version, wait for the main one.',
     nightsNotes: 'In development, Some features may not work.',
@@ -358,7 +358,8 @@ setInterval(() => {
   fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
     .then(r => r.json())
     .then(d => {
-      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${d.data.up_count / 2}`;
+      const roundedCount = Math.round(d.data.up_count / 2);
+      document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${roundedCount}`;
     })
     .catch(() => {
       document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
