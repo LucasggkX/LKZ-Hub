@@ -1,6 +1,6 @@
 if _G.exec then return end _G.exec = true
 local id = game.PlaceId; local raw
-function Add() print("execution of script number: " .. game:GetService("HttpService"):JSONDecode(request({Url="https://api.counterapi.dev/v2/lkz/lkz-hub", Method="GET"}).Body).data.up_count / 2) end
+function Add() print("execution of script number: " .. game:GetService("HttpService"):JSONDecode(request({Url="https://api.counterapi.dev/v2/lkz/lkz-hub/up", Method="GET"}).Body).data.up_count / 2) end
 
 if id == 126509999114328 then
   
