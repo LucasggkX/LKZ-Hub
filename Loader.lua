@@ -16,5 +16,7 @@ elseif id == 109983668079237 then
 
 else return end
 
-loadstring(game:HttpGet(raw))()
 Add()
+task.wait(0.1)
+loadstring(game:HttpGet(raw))()
+
