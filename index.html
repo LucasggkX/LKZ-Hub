@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKZ Hub - Roblox Scripts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #555;
+            --text-color: #333;
+            --bg-color: #f4f4f9;
+            --bg-dark-color: #e9e9f2;
+            --card-bg-color: #ffffff;
+            --border-color: #ddd;
+            --header-bg-color: rgba(255, 255, 255, 0.9);
+            --pre-bg-color: #f0f0f0;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+            --loader-primary: #00e0ff;
+            --loader-secondary: #ff0077;
+            --loader-bg: #08081a;
+            --loader-text: #e0e0e0;
+            --animation-duration: 0.5s;
+        }
+
+        .dark-theme {
+            --text-color: #f4f4f9;
+            --bg-color: #121212;
+            --bg-dark-color: #1c1c1c;
+            --card-bg-color: #1e1e1e;
+            --border-color: #333;
+            --header-bg-color: rgba(30, 30, 30, 0.9);
+            --pre-bg-color: #2b2b2b;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+            overflow: hidden;
+        }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--loader-bg);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease-out;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        .logo-word {
+            display: flex;
+            font-size: 5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: transparent;
+            position: relative;
+        }
+
+        .logo-letter {
+            opacity: 0;
+            transform: translateZ(-200px) rotateY(90deg) scale(0.5);
+            animation: 
+                fly-in-and-form var(--animation-duration) ease-out forwards;
+            animation-delay: calc(var(--index) * 0.08s);
+            color: var(--loader-primary);
+            text-shadow: 0 0 10px var(--loader-primary), 
+                         0 0 20px rgba(0, 224, 255, 0.5);
+            position: relative;
+            mix-blend-mode: screen;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .logo-letter::before {
+            content: attr(data-letter);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: var(--loader-secondary);
+            filter: blur(2px);
+            transform: translateZ(-10px);
+            opacity: 0.5;
+            animation: 
+                fly-in-shadow var(--animation-duration) ease-out forwards;
+            animation-delay: calc(var(--index) * 0.08s);
+        }
+
+        .loader-text-status {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: var(--loader-text);
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fade-in 1s ease-out forwards;
+            animation-delay: calc(var(--animation-duration) - 0.5s);
+        }
+
+        .background-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .line {
+            position: absolute;
+            background-color: rgba(0, 224, 255, 0.1);
+            height: 2px;
+            width: 100%;
+            animation: move-line 10s linear infinite;
+        }
+
+        .line:nth-child(1) { top: 10%; animation-delay: 0s; }
+        .line:nth-child(2) { top: 30%; animation-delay: 2s; }
+        .line:nth-child(3) { top: 50%; animation-delay: 4s; }
+        .line:nth-child(4) { top: 70%; animation-delay: 6s; }
+        .line:nth-child(5) { top: 90%; animation-delay: 8s; }
+
+        @keyframes fly-in-and-form {
+            0% { 
+                opacity: 0; 
+                transform: translateZ(-500px) rotateX(90deg) rotateY(45deg) scale(0); 
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateZ(-50px) rotateX(10deg) rotateY(5deg) scale(0.8);
+                filter: blur(2px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateZ(0) rotateX(0deg) rotateY(0deg) scale(1); 
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fly-in-shadow {
+            0% { 
+                opacity: 0; 
+                transform: translateZ(-500px) rotateX(90deg) rotateY(45deg) scale(0) translateX(20px); 
+            }
+            50% {
+                opacity: 0.3;
+                transform: translateZ(-50px) rotateX(10deg) rotateY(5deg) scale(0.8) translateX(5px);
+            }
+            100% { 
+                opacity: 0.5; 
+                transform: translateZ(-10px) rotateX(0deg) rotateY(0deg) scale(1) translateX(0px); 
+            }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes move-line {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        header, main, footer {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        header.loaded, main.loaded, footer.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        header {
+            background: var(--header-bg-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, border-color 0.3s, opacity 0.5s, transform 0.5s;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+        
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .theme-switcher {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+        
+        .theme-switcher:hover {
+            color: var(--primary-color);
+        }
+        
+        nav button {
+            padding: 12px 25px;
+            border: none;
+            background: var(--bg-dark-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.2s, color 0.2s;
+            color: var(--text-color);
+        }
+        
+        nav button.active {
+            background: var(--primary-color);
+            color: var(--card-bg-color);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        nav button:hover:not(.active) {
+            background: var(--border-color);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 30px;
+        }
+        
+        section.tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+            padding: 20px;
+        }
+        
+        section.tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .script-container {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .script-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .script-info h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .status-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .status-list li {
+            background: var(--bg-dark-color);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-list li strong {
+            color: var(--primary-color);
+        }
+        
+        .status-list li .status-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 5px #28a745;
+        }
+        
+        pre {
+            background: var(--pre-bg-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        pre code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-btn, .executions-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .copy-btn:active {
+          transform: scale(0.95);
+        }
+
+        .executions-btn:active {
+          transform: scale(0.95);
+        }
+
+        .copy-btn {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+        
+        .copy-btn:hover {
+            background: #666;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .executions-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+        }
+        
+        .executions-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
+        }
+        
+        .about-section {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .about-section h2 {
+            border-bottom: none;
+            margin-top: 0;
+            color: var(--text-color);
+        }
+        
+        .about-section p {
+            color: var(--secondary-color);
+        }
+        
+        .games-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-item {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .game-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .game-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .game-header img {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .game-info h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .toggle-details {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            background: var(--secondary-color);
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+            text-transform: capitalize;
+        }
+        
+        .toggle-details:hover {
+            background: #666;
+        }
+        
+        .game-details {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--bg-dark-color);
+            padding: 0 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 1rem;
+            color: var(--secondary-color);
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .game-details.active {
+            max-height: 500px;
+            padding: 20px;
+        }
+        
+        .game-details strong {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .game-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        
+        .game-details li {
+            margin-bottom: 8px;
+        }
+        
+        .game-details .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .game-details .status-indicator.active { background-color: #28a745; }
+        .game-details .status-indicator.inactive { background-color: #dc3545; }
+        .game-details .status-indicator.beta { background-color: #ffc107; }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            main {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .script-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .status-list {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="background-lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="logo-word">
+            <span class="logo-letter" style="--index:0;" data-letter="L">L</span>
+            <span class="logo-letter" style="--index:1;" data-letter="K">K</span>
+            <span class="logo-letter" style="--index:2;" data-letter="Z">Z</span>
+            <span class="logo-letter" style="--index:3; margin-left: 20px;" data-letter="H">H</span>
+            <span class="logo-letter" style="--index:4;" data-letter="U">U</span>
+            <span class="logo-letter" style="--index:5;" data-letter="B">B</span>
+        </div>
+        <div class="loader-text-status">INICIANDO SISTEMAS...</div>
+    </div>
+    <header>
+        <div class="logo" data-key="logo">LKZ Hub</div>
+        <nav>
+            <button class="tab-btn active" data-tab="main" data-key="mainTab">Main Script</button>
+            <button class="tab-btn" data-tab="about" data-key="aboutTab">About</button>
+            <button class="tab-btn" data-tab="games" data-key="gamesTab">Games</button>
+            <button id="theme-switcher-btn" class="theme-switcher">☀️</button>
+        </nav>
+    </header>
+    <main>
+        <section id="main" class="tab-content active">
+            <h1 data-key="mainHeading">Main Script</h1>
+            <p class="intro-text" data-key="mainDescription">Access and execute the primary LKZ Hub script quickly and safely. Our loader provides secure, up-to-date scripts for a seamless gaming experience.</p>
+            <div class="script-container">
+                <div class="script-info">
+                    <div>
+                        <h3 data-key="mainScriptTitle">Script Status</h3>
+                        <ul class="status-list" id="status-list">
+                            <li data-key="stealStatus"><span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Active</li>
+                            <li data-key="nightsStatus"><span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Active</li>
+                        </ul>
+                    </div>
+                </div>
+                <pre><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/LKZ-Hub/refs/heads/main/Loader.lua"))()</code></pre>
+                <div class="button-group">
+                    <button class="copy-btn" data-key="copyButton">Copy Script</button>
+                    <button class="executions-btn" id="execBtn" data-key="executionsBtn">Total Executions: ?</button>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="tab-content">
+            <h1 data-key="aboutHeading">About LKZ Hub</h1>
+            <div class="about-section">
+                <p data-key="aboutDescription">O LKZ Hub se dedica a fornecer scripts Roblox confiáveis, seguros e atualizados. Nossa missão é aprimorar sua experiência de jogo, oferecendo ferramentas práticas e funcionais, priorizando a segurança de sua conta e uma experiência de usuário impecável.</p>
+                <p data-key="futureDescription">Estamos empenhados em expandir nossa biblioteca de jogos e recursos suportados. Fique ligado para futuras atualizações.</p>
+            </div>
+        </section>
+        <section id="games" class="tab-content">
+            <h1 data-key="gamesHeading">Supported Games</h1>
+            <p class="intro-text" data-key="gamesIntro">Explore our extensive list of supported games, each with its own set of unique features and a dedicated status page. Click on a game to learn more about its current script status and recent updates.</p>
+            <div class="games-list">
+                <div class="game-item">
+                    <div class="game-header">
+                        <img src="https://tr.rbxcdn.com/180DAY-bfcc710b1a232b34e2d3b40f963f8cde/768/432/Image/Webp/noFilter" alt="Steal a Brainrot">
+                        <div class="game-info">
+                            <h3>Steal a Brainrot</h3>
+                            <button class="toggle-details" data-key="openStatusBtn">Open script status</button>
+                        </div>
+                    </div>
+                    <div class="game-details">
+                        <ul>
+                            <li><strong><span data-key="lastUpdateLabel">Last update:</span></strong> 12/09/2025</li>
+                            <li><strong><span data-key="scriptStatusLabel">Script status:</span></strong> <span class="status-indicator active"></span> <span data-key="stealStatusDetail">Active</span></li>
+                            <li><strong><span data-key="notesLabel">Notes:</span></strong> <span data-key="stealNotes">Improvised version, main release coming soon.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="game-header">
+                        <img src="https://tr.rbxcdn.com/180DAY-643b9b9285f3bd9b63cf392db12a4d87/768/432/Image/Webp/noFilter" alt="99 Nights in the Forest">
+                        <div class="game-info">
+                            <h3>99 Nights in the Forest</h3>
+                            <button class="toggle-details" data-key="openStatusBtn">Open script status</button>
+                        </div>
+                    </div>
+                    <div class="game-details">
+                        <ul>
+                            <li><strong><span data-key="lastUpdateLabel">Last update:</span></strong> 05/09/2025</li>
+                            <li><strong><span data-key="scriptStatusLabel">Script status:</span></strong> <span class="status-indicator active"></span> <span data-key="nightsStatusDetail">Active</span></li>
+                            <li><strong><span data-key="notesLabel">Notes:</strong> <span data-key="nightsNotes">Under development, some features may not function as expected.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <span data-key="footerText">LKZ Hub © 2025 — All Rights Reserved</span>
+    </footer>
+    <script>
+        const translations = {
+            'pt-BR': {
+                logo: 'LKZ Hub',
+                mainTab: 'Script Principal',
+                aboutTab: 'Sobre',
+                gamesTab: 'Jogos',
+                mainHeading: 'Script Principal',
+                mainDescription: 'Execute o script principal do LKZ Hub de forma rápida e segura! Nosso loader fornece scripts atualizados para uma experiência de jogo perfeita.',
+                mainScriptTitle: 'Status dos Scripts',
+                stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Ativo',
+                nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
+                copyButton: 'Copiar Script',
+                executionsBtn: 'Execuções Totais: ?',
+                aboutHeading: 'Sobre o LKZ Hub',
+                aboutDescription: 'O LKZ Hub se dedica a fornecer scripts Roblox confiáveis, seguros e atualizados. Nossa missão é aprimorar sua experiência de jogo, oferecendo ferramentas práticas e funcionais, priorizando a segurança de sua conta e uma experiência de usuário impecável.',
+                teamDescription: 'Agradecemos seu apoio e estamos animados para construir o futuro do scripting Roblox juntos.',
+                futureDescription: 'Estamos empenhados em expandir nossa biblioteca de jogos e recursos suportados. Fique ligado para futuras atualizações.',
+                gamesHeading: 'Jogos Suportados',
+                gamesIntro: 'Explore nossa extensa lista de jogos suportados, cada um com seu próprio conjunto de recursos exclusivos e uma página de status dedicada. Clique em um jogo para saber mais sobre o status atual do script e as atualizações recentes.',
+                openStatusBtn: 'Abrir status do script',
+                closeStatusBtn: 'Fechar status do script',
+                lastUpdateLabel: 'Última atualização:',
+                scriptStatusLabel: 'Status do script:',
+                notesLabel: 'Notas:',
+                stealStatusDetail: 'Ativo',
+                nightsStatusDetail: 'Ativo',
+                stealNotes: 'Versão improvisada, a principal será lançada em breve.',
+                nightsNotes: 'Em desenvolvimento, alguns recursos podem não funcionar como esperado.',
+                footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados'
+            },
+            'en': {
+                logo: 'LKZ Hub',
+                mainTab: 'Main Script',
+                aboutTab: 'About',
+                gamesTab: 'Games',
+                mainHeading: 'Main Script',
+                mainDescription: 'Access and execute the primary LKZ Hub script quickly and safely. Our loader provides secure, up-to-date scripts for a seamless gaming experience.',
+                mainScriptTitle: 'Script Status',
+                stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Active',
+                nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
+                copyButton: 'Copy Script',
+                executionsBtn: 'Total Executions: ?',
+                aboutHeading: 'About LKZ Hub',
+                aboutDescription: 'LKZ Hub is dedicated to providing reliable, secure, and regularly updated Roblox scripts. Our mission is to enhance your gaming experience by offering practical and functional tools while prioritizing your account safety and a seamless user experience.',
+                teamDescription: 'We appreciate your support and are excited to build the future of Roblox scripting together.',
+                futureDescription: 'We are committed to expanding our library of supported games and features. Stay tuned for upcoming updates.',
+                gamesHeading: 'Supported Games',
+                gamesIntro: 'Explore our extensive list of supported games, each with its own set of unique features and a dedicated status page. Click on a game to learn more about its current script status and recent updates.',
+                openStatusBtn: 'Open script status',
+                closeStatusBtn: 'Close script status',
+                lastUpdateLabel: 'Last update:',
+                scriptStatusLabel: 'Script status:',
+                notesLabel: 'Notes:',
+                stealStatusDetail: 'Active',
+                nightsStatusDetail: 'Active',
+                stealNotes: 'Improvised version, main release coming soon.',
+                nightsNotes: 'Under development, some features may not function as expected.',
+                footerText: 'LKZ Hub © 2025 — All Rights Reserved'
+            }
+        };
+        
+        const loaderContainer = document.querySelector('.loader-container');
+        const header = document.querySelector('header');
+        const main = document.querySelector('main');
+        const footer = document.querySelector('footer');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                loaderContainer.style.opacity = '0';
+                document.body.style.overflow = 'auto';
+                header.classList.add('loaded');
+                main.classList.add('loaded');
+                footer.classList.add('loaded');
+                setTimeout(() => {
+                    loaderContainer.style.display = 'none';
+                }, 1000);
+            }, 4000);
+        });
+        
+        function applyTranslations(lang) {
+            const currentTranslations = translations[lang];
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.dataset.key;
+                if (currentTranslations[key]) {
+                    element.innerHTML = currentTranslations[key];
+                }
+            });
+        }
+        
+        const userLang = navigator.language.startsWith('pt') ? 'pt-BR' : 'en';
+        applyTranslations(userLang);
+        
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+                tabButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                tabContents.forEach(c => c.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+        
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.parentElement.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code.trim());
+                btn.innerText = userLang === 'pt-BR' ? 'Copiado! ✅' : 'Copied! ✅';
+                setTimeout(() => btn.innerText = translations[userLang].copyButton, 2000);
+            });
+        });
+        
+        document.querySelectorAll('.toggle-details').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const details = btn.closest('.game-item').querySelector('.game-details');
+                const isActive = details.classList.contains('active');
+                document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
+                document.querySelectorAll('.toggle-details').forEach(b => b.innerText = translations[userLang].openStatusBtn);
+                if (!isActive) {
+                    details.classList.add('active');
+                    btn.innerText = translations[userLang].closeStatusBtn;
+                }
+            });
+        });
+        
+        const themeSwitcherBtn = document.getElementById('theme-switcher-btn');
+        themeSwitcherBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            themeSwitcherBtn.innerText = isDark ? '🌙' : '☀️';
+        });
+        
+        setInterval(() => {
+            fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
+                .then(r => r.json())
+                .then(d => {
+                    const roundedCount = Math.round(d.data.up_count / 2);
+                    document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${roundedCount}`;
+                })
+                .catch(() => {
+                    document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
+                });
+        }, 1000);
+    </script>
+</body>
+</html>
