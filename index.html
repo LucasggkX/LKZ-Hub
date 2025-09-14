@@ -383,7 +383,7 @@
             flex-wrap: wrap;
         }
         
-        .copy-btn, .executions-btn {
+        .copy-btn, .executions-btn, .views-btn {
             padding: 12px 25px;
             border: none;
             border-radius: var(--border-radius);
@@ -399,7 +399,7 @@
           transform: scale(0.95);
         }
 
-        .executions-btn:active {
+        .executions-btn:active, .views-btn:active {
           transform: scale(0.95);
         }
 
@@ -414,13 +414,13 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         
-        .executions-btn {
+        .executions-btn, .views-btn {
             background-color: var(--primary-color);
             color: #fff;
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
         }
         
-        .executions-btn:hover {
+        .executions-btn:hover, .views-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
         }
@@ -553,6 +553,41 @@
             margin-top: 60px;
             font-size: 0.95rem;
         }
+
+        .counter-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .counter-card {
+            background: var(--card-bg-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .counter-card h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
         
         @media (max-width: 768px) {
             header {
@@ -589,6 +624,10 @@
             
             .button-group {
                 flex-direction: column;
+            }
+
+            .counter-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -638,7 +677,16 @@
                 <pre><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/LKZ-Hub/refs/heads/main/Loader.lua"))()</code></pre>
                 <div class="button-group">
                     <button class="copy-btn" data-key="copyButton">Copy Script</button>
-                    <button class="executions-btn" id="execBtn" data-key="executionsBtn">Total Executions: ?</button>
+                </div>
+            </div>
+            <div class="counter-container">
+                <div class="counter-card">
+                    <h2 data-key="totalExecutionsTitle">Total Executions</h2>
+                    <span class="counter-value" id="execBtn" data-key="totalExecutionsValue">?</span>
+                </div>
+                <div class="counter-card">
+                    <h2 data-key="todayExecutionsTitle">Today's Executions</h2>
+                    <span class="counter-value" id="views-count" data-key="todayExecutionsValue">?</span>
                 </div>
             </div>
         </section>
@@ -704,7 +752,10 @@
                 stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Ativo',
                 nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
                 copyButton: 'Copiar Script',
-                executionsBtn: 'Execuções Totais: ?',
+                totalExecutionsTitle: 'Execuções Totais',
+                totalExecutionsValue: '?',
+                todayExecutionsTitle: 'Execuções de Hoje',
+                todayExecutionsValue: '?',
                 aboutHeading: 'Sobre o LKZ Hub',
                 aboutDescription: 'O LKZ Hub se dedica a fornecer scripts Roblox confiáveis, seguros e atualizados. Nossa missão é aprimorar sua experiência de jogo, oferecendo ferramentas práticas e funcionais, priorizando a segurança de sua conta e uma experiência de usuário impecável.',
                 teamDescription: 'Agradecemos seu apoio e estamos animados para construir o futuro do scripting Roblox juntos.',
@@ -733,7 +784,10 @@
                 stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Active',
                 nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
                 copyButton: 'Copy Script',
-                executionsBtn: 'Total Executions: ?',
+                totalExecutionsTitle: 'Total Executions',
+                totalExecutionsValue: '?',
+                todayExecutionsTitle: 'Today\'s Executions',
+                todayExecutionsValue: '?',
                 aboutHeading: 'About LKZ Hub',
                 aboutDescription: 'LKZ Hub is dedicated to providing reliable, secure, and regularly updated Roblox scripts. Our mission is to enhance your gaming experience by offering practical and functional tools while prioritizing your account safety and a seamless user experience.',
                 teamDescription: 'We appreciate your support and are excited to build the future of Roblox scripting together.',
@@ -776,7 +830,15 @@
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.dataset.key;
                 if (currentTranslations[key]) {
-                    element.innerHTML = currentTranslations[key];
+                    if (element.tagName === 'BUTTON' && element.id === 'execBtn') {
+                        // Special case for buttons
+                        element.innerText = currentTranslations[key];
+                    } else if (element.tagName === 'SPAN' && element.id === 'execBtn') {
+                        // Special case for span in counters
+                        element.textContent = currentTranslations[key];
+                    } else {
+                         element.innerHTML = currentTranslations[key];
+                    }
                 }
             });
         }
@@ -831,11 +893,22 @@
             fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
                 .then(r => r.json())
                 .then(d => {
-                    const roundedCount = Math.round(d.data.up_count / 2);
-                    document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ${roundedCount}`;
+                    const totalExecutions = Math.round(d.data.up_count / 2);
+                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
                 })
                 .catch(() => {
-                    document.getElementById('execBtn').innerText = `${translations[userLang].executionsBtn.split(':')[0]}: ?`;
+                    document.getElementById('execBtn').textContent = '?';
+                });
+
+            fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")
+                .then(response => response.json())
+                .then(data => {
+                    const todayExecutions = Math.floor(data.data.stats.today.up / 2);
+                    document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);
+                })
+                .catch(error => {
+                    document.getElementById("views-count").textContent = "?";
+                    console.error(error);
                 });
         }, 1000);
     </script>
