@@ -1,6 +1,5 @@
 if identifyexecutor() == "Solara" then
   game.Players.LocalPlayer:Kick("this executor is trash")
-  return
 end
 
 if _G.exec then return end _G.exec = true
