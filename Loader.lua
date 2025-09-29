@@ -1,5 +1,6 @@
-if identifyexecutor() == "Solara" then
-  game.Players.LocalPlayer:Kick("this executor is trash")
+local executor = identifyexecutor()
+if executor == "Solara" or "Xeno" then
+  game.Players.LocalPlayer:Kick("this executor is trash: ".. executor)
 end
 
 if _G.exec then return end _G.exec = true
