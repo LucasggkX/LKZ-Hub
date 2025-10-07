@@ -16,6 +16,4 @@ else
 end
 
 Add()
-setclipboard("lucasggkx.github.io/LKZ-Hub")
 loadstring(game:HttpGet(raw))()
-
