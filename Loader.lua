@@ -19,5 +19,5 @@ else
     return 
 end
 
-Add()
+-- Add()
 loadstring(game:HttpGet(raw))()
