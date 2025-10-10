@@ -888,27 +888,28 @@
             const isDark = document.body.classList.contains('dark-theme');
             themeSwitcherBtn.innerText = isDark ? '🌙' : '☀️';
         });
-        setInterval(() => {
-            fetch('https://counter.lucasemanuelguimaraes20.workers.dev/count')
-                .then(r => r.json())
-                .then(d => {
-                    const totalExecutions = d.count;
-                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
-                })
-                .catch(() => {
-                    document.getElementById('execBtn').textContent = '?';
-                });
+        setInterval(() => {  
+        fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')  
+            .then(r => r.json())  
+            .then(d => {  
+                const totalExecutions = Math.round(d.data.up_count / 2);  
+                document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);  
+            })  
+            .catch(() => {  
+                document.getElementById('execBtn').textContent = '?';  
+            });  
 
-            fetch('https://counter.lucasemanuelguimaraes20.workers.dev/count')
-                .then(r => r.json())
-                .then(d => {
-                    const todayExecutions = d.count;
-                    document.getElementById('views-count').textContent = todayExecutions.toLocaleString(userLang);
-                })
-                .catch(() => {
-                    document.getElementById('views-count').textContent = '?';
-                });
-        }, 1000);
+        fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")  
+            .then(response => response.json())  
+            .then(data => {  
+                const todayExecutions = Math.floor(data.data.stats.today.up / 2);  
+                document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);  
+            })  
+            .catch(error => {  
+                document.getElementById("views-count").textContent = "?";  
+                console.error(error);  
+            });  
+    }, 1000);
     </script>
 </body>
 </html>
