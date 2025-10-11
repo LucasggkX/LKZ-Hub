@@ -888,28 +888,48 @@
             const isDark = document.body.classList.contains('dark-theme');
             themeSwitcherBtn.innerText = isDark ? '🌙' : '☀️';
         });
-        setInterval(() => {  
-        fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')  
-            .then(r => r.json())  
-            .then(d => {  
-                const totalExecutions = Math.round(d.data.up_count / 2);  
-                document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);  
-            })  
-            .catch(() => {  
-                document.getElementById('execBtn').textContent = '?';  
-            });  
+const Counter = "Cloud";
 
-        fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")  
-            .then(response => response.json())  
-            .then(data => {  
-                const todayExecutions = Math.floor(data.data.stats.today.up / 2);  
-                document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);  
-            })  
-            .catch(error => {  
-                document.getElementById("views-count").textContent = "?";  
-                console.error(error);  
-            });  
-    }, 1000);
+if (Counter === "Cloud") {
+    fetch('https://counter.lucasemanuelguimaraes20.workers.dev/')
+        .then(r => r.json())
+        .then(d => {
+            document.getElementById('execBtn').textContent = d.counter.toLocaleString(userLang);
+        })
+        .catch(() => {
+            document.getElementById('execBtn').textContent = '?';
+        });
+
+    fetch('https://counter.lucasemanuelguimaraes20.workers.dev/')
+        .then(r => r.json())
+        .then(d => {
+            document.getElementById("views-count").textContent = d.dailyCounter.toLocaleString(userLang);
+        })
+        .catch(() => {
+            document.getElementById("views-count").textContent = "?";
+        });
+} else if (Counter === "Counter") {
+    fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')
+        .then(r => r.json())
+        .then(d => {
+            const totalExecutions = Math.round(d.data.up_count / 2);
+            document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
+        })
+        .catch(() => {
+            document.getElementById('execBtn').textContent = '?';
+        });
+
+    fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")
+        .then(response => response.json())
+        .then(data => {
+            const todayExecutions = Math.floor(data.data.stats.today.up / 2);
+            document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);
+        })
+        .catch(error => {
+            document.getElementById("views-count").textContent = "?";
+            console.error(error);
+        });
+}
     </script>
 </body>
 </html>
