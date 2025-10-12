@@ -14,7 +14,7 @@ function Add() local s, r = pcall(function() return request({Url="https://api.co
 if id == 126509999114328 then  
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/99%20Nights.lua"
 elseif id == 109983668079237 or id == 128762245270197 or id == 96342491571673 then  
-    raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Steal%20a%20brainrot/Principal.lua"
+    raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Steal%20a%20brainrot.lua"
 else 
     return 
 end
