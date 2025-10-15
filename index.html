@@ -556,19 +556,19 @@
 
         .counter-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
             margin-top: 30px;
-            text-align: center;
         }
 
         .counter-card {
             background: var(--card-bg-color);
-            padding: 20px;
+            padding: 25px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             border: 1px solid var(--border-color);
             transition: transform 0.3s;
+            text-align: center;
         }
 
         .counter-card:hover {
@@ -580,6 +580,7 @@
             font-size: 1.5rem;
             border-bottom: none;
             padding-bottom: 0;
+            margin-bottom: 10px;
         }
 
         .counter-value {
@@ -587,6 +588,63 @@
             font-weight: 700;
             color: var(--primary-color);
             display: block;
+        }
+
+        .discord-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            text-align: center;
+        }
+
+        .discord-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        #discord-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        
+        .discord-header div {
+            text-align: left;
+        }
+
+        .discord-stats {
+            margin-bottom: 15px;
+        }
+        
+        .discord-stats p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        #join-btn {
+            display: block;
+            background-color: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #join-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(88, 101, 242, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -688,6 +746,20 @@
                     <h2 data-key="todayExecutionsTitle">Today's Executions</h2>
                     <span class="counter-value" id="views-count" data-key="todayExecutionsValue">?</span>
                 </div>
+                <div class="counter-card discord-card">
+                    <div class="discord-header">
+                        <img id="discord-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Ícone do servidor">
+                        <div>
+                            <h2 data-key="discordTitle">Our Discord</h2>
+                            <span id="server-name" style="font-weight: 600;">Carregando...</span>
+                        </div>
+                    </div>
+                    <div class="discord-stats">
+                        <p id="member-count">Membros: --</p>
+                        <p id="online-count">Online: --</p>
+                    </div>
+                    <a id="join-btn" href="https://discord.gg/lkzhub" target="_blank" data-key="discordJoinButton">Join Server</a>
+                </div>
             </div>
         </section>
         <section id="about" class="tab-content">
@@ -753,12 +825,9 @@
                 nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
                 copyButton: 'Copiar Script',
                 totalExecutionsTitle: 'Execuções Totais',
-                totalExecutionsValue: '?',
                 todayExecutionsTitle: 'Execuções de Hoje',
-                todayExecutionsValue: '?',
                 aboutHeading: 'Sobre o LKZ Hub',
                 aboutDescription: 'O LKZ Hub se dedica a fornecer scripts Roblox confiáveis, seguros e atualizados. Nossa missão é aprimorar sua experiência de jogo, oferecendo ferramentas práticas e funcionais, priorizando a segurança de sua conta e uma experiência de usuário impecável.',
-                teamDescription: 'Agradecemos seu apoio e estamos animados para construir o futuro do scripting Roblox juntos.',
                 futureDescription: 'Estamos empenhados em expandir nossa biblioteca de jogos e recursos suportados. Fique ligado para futuras atualizações.',
                 gamesHeading: 'Jogos Suportados',
                 gamesIntro: 'Explore nossa extensa lista de jogos suportados, cada um com seu próprio conjunto de recursos exclusivos e uma página de status dedicada. Clique em um jogo para saber mais sobre o status atual do script e as atualizações recentes.',
@@ -771,7 +840,9 @@
                 nightsStatusDetail: 'Ativo',
                 stealNotes: 'funcionando perfeitamente com várias funções para ajudar nos roubos ',
                 nightsNotes: 'Em desenvolvimento, alguns recursos podem não funcionar como esperado.',
-                footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados'
+                footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
+                discordTitle: 'Nosso Discord',
+                discordJoinButton: 'Entrar no servidor'
             },
             'en': {
                 logo: 'LKZ Hub',
@@ -785,12 +856,9 @@
                 nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
                 copyButton: 'Copy Script',
                 totalExecutionsTitle: 'Total Executions',
-                totalExecutionsValue: '?',
                 todayExecutionsTitle: 'Today\'s Executions',
-                todayExecutionsValue: '?',
                 aboutHeading: 'About LKZ Hub',
                 aboutDescription: 'LKZ Hub is dedicated to providing reliable, secure, and regularly updated Roblox scripts. Our mission is to enhance your gaming experience by offering practical and functional tools while prioritizing your account safety and a seamless user experience.',
-                teamDescription: 'We appreciate your support and are excited to build the future of Roblox scripting together.',
                 futureDescription: 'We are committed to expanding our library of supported games and features. Stay tuned for upcoming updates.',
                 gamesHeading: 'Supported Games',
                 gamesIntro: 'Explore our extensive list of supported games, each with its own set of unique features and a dedicated status page. Click on a game to learn more about its current script status and recent updates.',
@@ -803,7 +871,9 @@
                 nightsStatusDetail: 'Active',
                 stealNotes: 'working perfectly with several functions to help with robberies.',
                 nightsNotes: 'Under development, some features may not function as expected.',
-                footerText: 'LKZ Hub © 2025 — All Rights Reserved'
+                footerText: 'LKZ Hub © 2025 — All Rights Reserved',
+                discordTitle: 'Our Discord',
+                discordJoinButton: 'Join Server'
             }
         };
         
@@ -831,10 +901,8 @@
                 const key = element.dataset.key;
                 if (currentTranslations[key]) {
                     if (element.tagName === 'BUTTON' && element.id === 'execBtn') {
-                        // Special case for buttons
                         element.innerText = currentTranslations[key];
                     } else if (element.tagName === 'SPAN' && element.id === 'execBtn') {
-                        // Special case for span in counters
                         element.textContent = currentTranslations[key];
                     } else {
                          element.innerHTML = currentTranslations[key];
@@ -888,28 +956,56 @@
             const isDark = document.body.classList.contains('dark-theme');
             themeSwitcherBtn.innerText = isDark ? '🌙' : '☀️';
         });
-        setInterval(() => {  
-        fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')  
-            .then(r => r.json())  
-            .then(d => {  
-                const totalExecutions = Math.round(d.data.up_count / 2);  
-                document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);  
-            })  
-            .catch(() => {  
-                document.getElementById('execBtn').textContent = '?';  
-            });  
 
-        fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")  
-            .then(response => response.json())  
-            .then(data => {  
-                const todayExecutions = Math.floor(data.data.stats.today.up / 2);  
-                document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);  
-            })  
-            .catch(error => {  
-                document.getElementById("views-count").textContent = "?";  
-                console.error(error);  
-            });  
-    }, 1000);
+        function setupCounters() {
+            fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')  
+                .then(r => r.json())  
+                .then(d => {  
+                    const totalExecutions = Math.round(d.data.up_count / 2);  
+                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);  
+                })  
+                .catch(() => {  
+                    document.getElementById('execBtn').textContent = '?';  
+                });  
+
+            fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")  
+                .then(response => response.json())  
+                .then(data => {  
+                    const todayExecutions = Math.floor(data.data.stats.today.up / 2);  
+                    document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);  
+                })  
+                .catch(error => {  
+                    document.getElementById("views-count").textContent = "?";  
+                });
+        }
+        
+        async function atualizarDiscord() {
+            const inviteCode = "lkzhub";
+            const apiURL = `https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`;
+            try {
+                const r = await fetch(apiURL);
+                const d = await r.json();
+
+                if (d.guild) {
+                const icon = d.guild.icon 
+                    ? `https://cdn.discordapp.com/icons/${d.guild.id}/${d.guild.icon}.png?size=128`
+                    : "https://cdn.discordapp.com/embed/avatars/0.png";
+                document.getElementById("discord-icon").src = icon;
+                document.getElementById("server-name").innerText = d.guild.name;
+                document.getElementById("member-count").innerText = `👥 Membros: ${d.approximate_member_count.toLocaleString(userLang)}`;
+                document.getElementById("online-count").innerText = `🟢 Online: ${d.approximate_presence_count.toLocaleString(userLang)}`;
+                } else {
+                document.getElementById("server-name").innerText = "Erro ao carregar";
+                }
+            } catch {
+                document.getElementById("server-name").innerText = "Falha na conexão";
+            }
+        }
+
+        setInterval(setupCounters, 2000);
+        setInterval(atualizarDiscord, 60000);
+        setupCounters();
+        atualizarDiscord();
     </script>
 </body>
 </html>
