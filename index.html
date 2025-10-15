@@ -383,7 +383,7 @@
             flex-wrap: wrap;
         }
         
-        .copy-btn, .executions-btn, .views-btn {
+        .copy-btn {
             padding: 12px 25px;
             border: none;
             border-radius: var(--border-radius);
@@ -393,36 +393,18 @@
             transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            background: var(--secondary-color);
+            color: #fff;
         }
         
         .copy-btn:active {
           transform: scale(0.95);
         }
 
-        .executions-btn:active, .views-btn:active {
-          transform: scale(0.95);
-        }
-
-        .copy-btn {
-            background: var(--secondary-color);
-            color: #fff;
-        }
-        
         .copy-btn:hover {
             background: #666;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        
-        .executions-btn, .views-btn {
-            background-color: var(--primary-color);
-            color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
-        }
-        
-        .executions-btn:hover, .views-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
         }
         
         .about-section {
@@ -625,10 +607,17 @@
             text-align: left;
         }
 
-        #server-name {
+        .discord-header-text h2 {
             font-size: 1.75rem;
             font-weight: 700;
-            margin: 0;
+            margin: 0 0 5px 0;
+            border: none;
+        }
+        
+        #server-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--secondary-color);
         }
 
         .discord-stats {
@@ -758,17 +747,18 @@
             <div class="counter-container">
                 <div class="counter-card">
                     <h2 data-key="totalExecutionsTitle">Total Executions</h2>
-                    <span class="counter-value" id="execBtn" data-key="totalExecutionsValue">?</span>
+                    <span class="counter-value" id="execBtn">?</span>
                 </div>
                 <div class="counter-card">
                     <h2 data-key="todayExecutionsTitle">Today's Executions</h2>
-                    <span class="counter-value" id="views-count" data-key="todayExecutionsValue">?</span>
+                    <span class="counter-value" id="views-count">?</span>
                 </div>
                 <div class="counter-card discord-card">
                     <div class="discord-header">
                         <img id="discord-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Ícone do servidor">
                         <div class="discord-header-text">
-                            <h2 data-key="discordTitle" id="server-name">Carregando...</h2>
+                            <h2 data-key="discordTitle">Our Discord</h2>
+                            <span id="server-name">Carregando...</span>
                         </div>
                     </div>
                     <div class="discord-stats">
@@ -838,8 +828,8 @@
                 mainHeading: 'Script Principal',
                 mainDescription: 'Execute o script principal do LKZ Hub de forma rápida e segura! Nosso loader fornece scripts atualizados para uma experiência de jogo perfeita.',
                 mainScriptTitle: 'Status dos Scripts',
-                stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Ativo',
-                nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Ativo',
+                stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Ativo',
+                nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Ativo',
                 copyButton: 'Copiar Script',
                 totalExecutionsTitle: 'Execuções Totais',
                 todayExecutionsTitle: 'Execuções de Hoje',
@@ -858,7 +848,8 @@
                 stealNotes: 'funcionando perfeitamente com várias funções para ajudar nos roubos ',
                 nightsNotes: 'Em desenvolvimento, alguns recursos podem não funcionar como esperado.',
                 footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
-                discordJoinButton: 'Entrar no servidor'
+                discordTitle: 'Nosso Discord',
+                discordJoinButton: 'Entrar no Servidor'
             },
             'en': {
                 logo: 'LKZ Hub',
@@ -868,8 +859,8 @@
                 mainHeading: 'Main Script',
                 mainDescription: 'Access and execute the primary LKZ Hub script quickly and safely. Our loader provides secure, up-to-date scripts for a seamless gaming experience.',
                 mainScriptTitle: 'Script Status',
-                stealStatus: '🟢 <strong>Steal a Brainrot</strong> — Active',
-                nightsStatus: '🟢 <strong>99 Nights in the Forest</strong> — Active',
+                stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Active',
+                nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Active',
                 copyButton: 'Copy Script',
                 totalExecutionsTitle: 'Total Executions',
                 todayExecutionsTitle: 'Today\'s Executions',
@@ -888,16 +879,31 @@
                 stealNotes: 'working perfectly with several functions to help with robberies.',
                 nightsNotes: 'Under development, some features may not function as expected.',
                 footerText: 'LKZ Hub © 2025 — All Rights Reserved',
+                discordTitle: 'Our Discord',
                 discordJoinButton: 'Join Server'
             }
         };
         
-        const loaderContainer = document.querySelector('.loader-container');
-        const header = document.querySelector('header');
-        const main = document.querySelector('main');
-        const footer = document.querySelector('footer');
-        
+        const userLang = navigator.language.startsWith('pt') ? 'pt-BR' : 'en';
+
+        function applyTranslations(lang) {
+            const currentTranslations = translations[lang] || translations['en'];
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.dataset.key;
+                if (currentTranslations[key]) {
+                    element.innerHTML = currentTranslations[key];
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            const loaderContainer = document.querySelector('.loader-container');
+            const header = document.querySelector('header');
+            const main = document.querySelector('main');
+            const footer = document.querySelector('footer');
+
+            applyTranslations(userLang);
+            
             setTimeout(() => {
                 loaderContainer.style.opacity = '0';
                 document.body.style.overflow = 'auto';
@@ -910,24 +916,12 @@
             }, 4000);
         });
         
-        function applyTranslations(lang) {
-            const currentTranslations = translations[lang];
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.dataset.key;
-                if (currentTranslations[key]) {
-                    element.innerHTML = currentTranslations[key];
-                }
-            });
-        }
-        
-        const userLang = navigator.language.startsWith('pt') ? 'pt-BR' : 'en';
-        applyTranslations(userLang);
-        
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
+                if(btn.id === 'theme-switcher-btn') return;
                 const target = btn.dataset.tab;
                 tabButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -938,10 +932,11 @@
         
         document.querySelectorAll('.copy-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const code = btn.parentElement.previousElementSibling.textContent;
+                const code = btn.closest('.script-container').querySelector('pre code').textContent;
                 navigator.clipboard.writeText(code.trim());
+                const originalText = translations[userLang].copyButton;
                 btn.innerText = userLang === 'pt-BR' ? 'Copiado! ✅' : 'Copied! ✅';
-                setTimeout(() => btn.innerText = translations[userLang].copyButton, 2000);
+                setTimeout(() => btn.innerText = originalText, 2000);
             });
         });
         
@@ -950,11 +945,15 @@
                 e.stopPropagation();
                 const details = btn.closest('.game-item').querySelector('.game-details');
                 const isActive = details.classList.contains('active');
+                const openText = translations[userLang].openStatusBtn;
+                const closeText = translations[userLang].closeStatusBtn;
+
                 document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
-                document.querySelectorAll('.toggle-details').forEach(b => b.innerText = translations[userLang].openStatusBtn);
+                document.querySelectorAll('.toggle-details').forEach(b => b.innerText = openText);
+                
                 if (!isActive) {
                     details.classList.add('active');
-                    btn.innerText = translations[userLang].closeStatusBtn;
+                    btn.innerText = closeText;
                 }
             });
         });
@@ -1011,7 +1010,7 @@
             }
         }
 
-        setInterval(setupCounters, 2000);
+        setInterval(setupCounters, 5000);
         setInterval(atualizarDiscord, 60000);
         setupCounters();
         atualizarDiscord();
