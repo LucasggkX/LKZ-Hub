@@ -54,20 +54,17 @@
             transition: background-color 0.4s, color 0.4s;
             line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: auto; /* Garantir que a barra de rolagem funcione ao carregar */
+            overflow-y: auto;
         }
 
-        /* 1. Loader Styles (DESABILITADOS PARA ABERTURA IMEDIATA) */
         .loader-container {
             display: none !important;
         }
 
-        /* Animações e componentes do Loader mantidos, mas a div principal é escondida */
         .logo-word,.loader-letter,.loader-text-status,.background-lines,.line {
             display: none;
         }
         
-        /* Main Content Styles - REMOVIDO OPACITY/TRANSFORM DO HEADER/MAIN/FOOTER PARA ABRIR IMEDIATAMENTE */
         header.loaded, main.loaded, footer.loaded {
             opacity: 1;
             transform: translateY(0);
@@ -574,6 +571,18 @@
             box-shadow: 0 10px 20px rgba(88, 101, 242, 0.6);
         }
         
+        @media (min-width: 900px) { /* Adicionar ou ajustar o breakpoint para desktop */
+            .counter-container {
+                /* Força 2 colunas iguais para desktop */
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .counter-card:nth-child(3) {
+                /* Garante que o terceiro card (Discord) ocupe as 2 colunas */
+                grid-column: span 2; 
+            }
+        }
+        
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -913,8 +922,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             applyTranslations(userLang);
             
-            // REMOVIDO: Timeout do loader para abertura imediata.
-            // O CSS .loader-container { display: none !important; } já esconde o loader.
         });
         
         const tabButtons = document.querySelectorAll('.tab-btn');
