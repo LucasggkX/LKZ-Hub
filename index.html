@@ -266,7 +266,7 @@
         }
 
         pre::before {
-            content: "LUA Script Loader";
+            content: "LKZ Hub Loader";
             position: absolute;
             top: 5px;
             right: 10px;
@@ -571,14 +571,12 @@
             box-shadow: 0 10px 20px rgba(88, 101, 242, 0.6);
         }
         
-        @media (min-width: 900px) { /* Adicionar ou ajustar o breakpoint para desktop */
+        @media (min-width: 900px) {
             .counter-container {
-                /* Força 2 colunas iguais para desktop */
                 grid-template-columns: 1fr 1fr;
             }
 
             .counter-card:nth-child(3) {
-                /* Garante que o terceiro card (Discord) ocupe as 2 colunas */
                 grid-column: span 2; 
             }
         }
@@ -764,11 +762,11 @@
             <div class="counter-container">
                 <div class="counter-card">
                     <h2 data-key="totalExecutionsTitle">Execuções Totais</h2>
-                    <span class="counter-value" id="execBtn">?</span>
+                    <span class="counter-value" id="execBtn">0</span>
                 </div>
                 <div class="counter-card">
                     <h2 data-key="todayExecutionsTitle">Execuções de Hoje</h2>
-                    <span class="counter-value" id="views-count">?</span>
+                    <span class="counter-value" id="views-count">0</span>
                 </div>
                 <div class="counter-card discord-card">
                     <div class="discord-header">
@@ -973,26 +971,54 @@
             themeSwitcherBtn.innerText = isLight ? '☀️' : '🌙';
         });
 
-        function setupCounters() {
-            fetch('https://api.counterapi.dev/v2/lkz/lkz-hub')  
-                .then(r => r.json())  
-                .then(d => {  
-                    const totalExecutions = Math.round(d.data.up_count / 2);  
-                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);  
-                })  
-                .catch(() => {  
-                    document.getElementById('execBtn').textContent = '?';  
-                });  
+        function animateCounter(elementId, finalValue, duration = 500) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
 
-            fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats")  
-                .then(response => response.json())  
-                .then(data => {  
-                    const todayExecutions = Math.floor(data.data.stats.today.up / 2);  
-                    document.getElementById("views-count").textContent = todayExecutions.toLocaleString(userLang);  
-                })  
-                .catch(error => {  
-                    document.getElementById("views-count").textContent = "?";  
-                });
+            const startValue = 0;
+            let startTime;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1); 
+                const currentValue = Math.floor(progress * finalValue);
+
+                element.textContent = currentValue.toLocaleString(userLang);
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = finalValue.toLocaleString(userLang);
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        let firstLoad = true;
+
+        function setupCounters() {
+            Promise.all([
+                fetch('https://api.counterapi.dev/v2/lkz/lkz-hub').then(r => r.json()),
+                fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
+            ]).then(([totalData, todayData]) => {
+                const totalExecutions = Math.round(totalData.data.up_count / 2);
+                const todayExecutions = Math.floor(todayData.data.stats.today.up / 2);
+                
+                if (firstLoad) {
+                    animateCounter('execBtn', totalExecutions, 1500);
+                    animateCounter('views-count', todayExecutions, 1500);
+                    firstLoad = false;
+                } else {
+                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
+                    document.getElementById('views-count').textContent = todayExecutions.toLocaleString(userLang);
+                }
+
+            }).catch(() => {
+                document.getElementById('execBtn').textContent = '?';
+                document.getElementById('views-count').textContent = '?';
+            });
         }
         
         async function atualizarDiscord() {
@@ -1022,10 +1048,10 @@
             }
         }
 
-        setInterval(setupCounters, 2000);
-        setInterval(atualizarDiscord, 2000);
         setupCounters();
         atualizarDiscord();
+        setInterval(setupCounters, 2000); 
+        setInterval(atualizarDiscord, 2000); 
     </script>
 </body>
 </html>
