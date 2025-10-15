@@ -556,7 +556,7 @@
 
         .counter-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-top: 30px;
         }
@@ -567,12 +567,28 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             border: 1px solid var(--border-color);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
         }
 
         .counter-card:hover {
             transform: translateY(-5px);
+        }
+        
+        .counter-card.discord-card {
+            grid-column: 1 / -1;
+            padding: 30px;
+            border: 2px solid #5865F2;
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.15);
+            background: linear-gradient(145deg, var(--card-bg-color), var(--bg-dark-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .discord-card:hover {
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.25);
         }
 
         .counter-card h2 {
@@ -590,63 +606,69 @@
             display: block;
         }
 
-        .discord-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: stretch;
-            text-align: center;
-        }
-
         .discord-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
         
         #discord-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
             flex-shrink: 0;
         }
         
-        .discord-header div {
+        .discord-header-text {
             text-align: left;
         }
 
-        .discord-stats {
-            margin-bottom: 15px;
+        #server-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0;
         }
-        
-        .discord-stats p {
-            margin: 5px 0;
-            font-size: 1.1rem;
+
+        .discord-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
             color: var(--secondary-color);
         }
 
         #join-btn {
-            display: block;
+            display: inline-block;
             background-color: #5865F2;
             color: white;
             text-decoration: none;
-            padding: 12px 25px;
+            padding: 14px 35px;
             border-radius: var(--border-radius);
             transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 6px 12px rgba(88, 101, 242, 0.2);
         }
 
         #join-btn:hover {
             background-color: #4752c4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(88, 101, 242, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(88, 101, 242, 0.3);
         }
         
+        @media (max-width: 900px) {
+            .counter-container {
+                grid-template-columns: 1fr;
+            }
+            .counter-card.discord-card {
+                grid-column: auto;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -682,10 +704,6 @@
             
             .button-group {
                 flex-direction: column;
-            }
-
-            .counter-container {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -749,9 +767,8 @@
                 <div class="counter-card discord-card">
                     <div class="discord-header">
                         <img id="discord-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Ícone do servidor">
-                        <div>
-                            <h2 data-key="discordTitle">Our Discord</h2>
-                            <span id="server-name" style="font-weight: 600;">Carregando...</span>
+                        <div class="discord-header-text">
+                            <h2 data-key="discordTitle" id="server-name">Carregando...</h2>
                         </div>
                     </div>
                     <div class="discord-stats">
@@ -841,7 +858,6 @@
                 stealNotes: 'funcionando perfeitamente com várias funções para ajudar nos roubos ',
                 nightsNotes: 'Em desenvolvimento, alguns recursos podem não funcionar como esperado.',
                 footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
-                discordTitle: 'Nosso Discord',
                 discordJoinButton: 'Entrar no servidor'
             },
             'en': {
@@ -872,7 +888,6 @@
                 stealNotes: 'working perfectly with several functions to help with robberies.',
                 nightsNotes: 'Under development, some features may not function as expected.',
                 footerText: 'LKZ Hub © 2025 — All Rights Reserved',
-                discordTitle: 'Our Discord',
                 discordJoinButton: 'Join Server'
             }
         };
@@ -900,13 +915,7 @@
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.dataset.key;
                 if (currentTranslations[key]) {
-                    if (element.tagName === 'BUTTON' && element.id === 'execBtn') {
-                        element.innerText = currentTranslations[key];
-                    } else if (element.tagName === 'SPAN' && element.id === 'execBtn') {
-                        element.textContent = currentTranslations[key];
-                    } else {
-                         element.innerHTML = currentTranslations[key];
-                    }
+                    element.innerHTML = currentTranslations[key];
                 }
             });
         }
