@@ -1005,14 +1005,13 @@
                 if (!startTime) startTime = timestamp;
                 const elapsed = timestamp - startTime;
                 const progress = Math.min(elapsed / duration, 1); 
-                const currentValue = Math.floor(progress * finalValue);
+                
+                const currentValue = Math.floor(startValue + (finalValue - startValue) * progress);
 
                 element.textContent = currentValue.toLocaleString(userLang);
 
                 if (progress < 1) {
                     requestAnimationFrame(step);
-                } else {
-                    element.textContent = finalValue.toLocaleString(userLang);
                 }
             }
 
@@ -1023,8 +1022,8 @@
 
         function setupCounters() {
             Promise.all([
-                fetch('https://count.lucasggkx.workers.dev/v2/lkz/lkz-hub').then(r => r.json()),
-                fetch("https://count.lucasggkx.workers.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
+                fetch('https://api.counterapi.dev/v2/lkz/lkz-hub').then(r => r.json()),
+                fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
             ]).then(([totalData, todayData]) => {
                 const totalExecutions = Math.round(totalData.data.up_count / 2);
                 const todayExecutions = Math.floor(todayData.data.stats.today.up / 2);
