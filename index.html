@@ -751,6 +751,7 @@
                         <ul class="status-list" id="status-list">
                             <li data-key="stealStatus"><span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Ativo</li>
                             <li data-key="nightsStatus"><span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Ativo</li>
+                            <li data-key="pvbStatus"><span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Ativo</li>
                         </ul>
                     </div>
                 </div>
@@ -805,7 +806,7 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 18/10/2025</li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 20/10/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="stealStatusDetail">Ativo</span></li>
                             <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="stealNotes">funcionando perfeitamente com várias funções para ajudar nos roubos.</span></li>
                         </ul>
@@ -827,6 +828,22 @@
                         </ul>
                     </div>
                 </div>
+                <div class="game-item">
+                    <div class="game-header">
+                        <img src="https://tr.rbxcdn.com/180DAY-b2065d98fbb7f2ecfcf2b0924ecd4a11/512/512/Image/Webp/noFilter" alt="Plants vs Brainrot">
+                        <div class="game-info">
+                            <h3>Plants vs Brainrot</h3>
+                            <button class="toggle-details" data-key="openStatusBtn">Abrir status do script</button>
+                        </div>
+                    </div>
+                    <div class="game-details">
+                        <ul>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 20/10/2025</li>
+                            <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="pvbStatusDetail">Ativo</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="pvbNotes">Ele ajuda no início do jogo, nada tão OP.</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -845,6 +862,7 @@
                 mainScriptTitle: 'Status dos Scripts',
                 stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Ativo',
                 nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Ativo',
+                pvbStatus: '<span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Ativo',
                 copyButton: 'Copiar Script',
                 totalExecutionsTitle: 'Execuções Totais',
                 todayExecutionsTitle: 'Execuções de Hoje',
@@ -860,8 +878,10 @@
                 notesLabel: 'Notas:',
                 stealStatusDetail: 'Ativo',
                 nightsStatusDetail: 'Ativo',
+                pvbStatusDetail: 'Ativo',
                 stealNotes: 'funcionando perfeitamente com várias funções para ajudar nos roubos.',
                 nightsNotes: 'Em desenvolvimento, alguns recursos podem não funcionar como esperado.',
+                pvbNotes: 'Ele ajuda no início do jogo, nada tão OP.',
                 footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
                 discordTitle: 'Nosso Discord',
                 discordJoinButton: 'Entrar no Servidor',
@@ -877,6 +897,7 @@
                 mainScriptTitle: 'Script Status',
                 stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Active',
                 nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Active',
+                pvbStatus: '<span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Active',
                 copyButton: 'Copy Script',
                 totalExecutionsTitle: 'Total Executions',
                 todayExecutionsTitle: 'Today\'s Executions',
@@ -892,8 +913,10 @@
                 notesLabel: 'Notes:',
                 stealStatusDetail: 'Active',
                 nightsStatusDetail: 'Active',
+                pvbStatusDetail: 'Active',
                 stealNotes: 'working perfectly with several functions to help with robberies.',
                 nightsNotes: 'Under development, some features may not function as expected.',
+                pvbNotes: 'It helps at the beginning of the game, nothing too OP.',
                 footerText: 'LKZ Hub © 2025 — All Rights Reserved',
                 discordTitle: 'Our Discord',
                 discordJoinButton: 'Join Server',
@@ -1000,8 +1023,8 @@
 
         function setupCounters() {
             Promise.all([
-                fetch('https://api.counterapi.dev/v2/lkz/lkz-hub').then(r => r.json()),
-                fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
+                fetch('https://count.lucasggkx.workers.dev/v2/lkz/lkz-hub').then(r => r.json()),
+                fetch("https://count.lucasggkx.workers.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
             ]).then(([totalData, todayData]) => {
                 const totalExecutions = Math.round(totalData.data.up_count / 2);
                 const todayExecutions = Math.floor(todayData.data.stats.today.up / 2);
