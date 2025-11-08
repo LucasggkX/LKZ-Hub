@@ -1,5 +1,5 @@
 local executor = identifyexecutor()
-if executor == "Solara" or executor == "Xeno" then
+if executor == "Solara" or executor == "Xeno" or executor == "KRNL" then
     game.Players.LocalPlayer:Kick("this executor is trash: " .. executor)
 end
 
