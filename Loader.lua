@@ -9,24 +9,7 @@ _G.exec = true
 local id = game.PlaceId
 local raw
 
-function Add()
-    local s, r = pcall(function()
-        return request({
-            Url = "https://counter.lucasemanuelguimaraes20.workers.dev/up",
-            Method = "GET"
-        })
-    end)
-    
-    if s and r then
-        local d = game:GetService("HttpService"):JSONDecode(r.Body)
-        if d and d.total then
-            print("Executions: " .. d.total)
-            print("Today: " .. d.daily)
-        end
-    else
-        print("Error: " .. tostring(r))
-    end
-end -- fuck index.js I hate JavaScript.
+function Add() local s, r = pcall(function() return request({Url="https://counter.lucasemanuelguimaraes20.workers.dev/up", Method="GET"}) end) if s then local s2, r2 = pcall(function() return request({Url="https://counter.lucasemanuelguimaraes20.workers.dev/stats", Method="GET"}) end) if s2 and r2 then local d = game:GetService("HttpService"):JSONDecode(r2.Body) if d and d.total then print("Executions: " .. d.total) print("Today: " .. d.daily) end else print("Error: " .. tostring(r2)) end else print("Error: " .. tostring(r)) end end
 
 if id == 126509999114328 then  
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/99%20Nights.lua"
