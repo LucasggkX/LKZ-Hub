@@ -19,12 +19,14 @@ function Add()
     
     if s and r then
         local d = game:GetService("HttpService"):JSONDecode(r.Body)
-        if d and d.count then
-            print("Executions: " .. d.count)
-            print("Today: " .. (d.daily or 0))
+        if d and d.total then
+            print("Executions: " .. d.total)
+            print("Today: " .. d.daily)
         end
+    else
+        print("Error: " .. tostring(r))
     end
-end
+end -- fuck index.js I hate JavaScript.
 
 if id == 126509999114328 then  
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/99%20Nights.lua"
