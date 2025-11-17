@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #5865F2;
@@ -22,11 +21,6 @@
             --pre-bg-color: #010409;
             --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             --border-radius: 10px;
-            --loader-primary: #00e0ff;
-            --loader-secondary: #ff0077;
-            --loader-bg: #08081a;
-            --loader-text: #e0e0e0;
-            --animation-duration: 0.8s;
         }
 
         .light-theme {
@@ -41,9 +35,6 @@
             --header-bg-color: rgba(255, 255, 255, 0.95);
             --pre-bg-color: #f0f0f0;
             --box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            --loader-primary: #007BFF;
-            --loader-bg: #ffffff;
-            --loader-text: #333333;
         }
 
         body {
@@ -59,10 +50,6 @@
 
         .loader-container {
             display: none !important;
-        }
-
-        .logo-word,.loader-letter,.loader-text-status,.background-lines,.line {
-            display: none;
         }
         
         header.loaded, main.loaded, footer.loaded {
@@ -575,10 +562,6 @@
             .counter-container {
                 grid-template-columns: 1fr 1fr;
             }
-
-            .counter-card:nth-child(3) {
-                grid-column: span 2; 
-            }
         }
         
         @media (max-width: 768px) {
@@ -713,24 +696,6 @@
     </style>
 </head>
 <body>
-    <div class="loader-container">
-        <div class="background-lines">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-        <div class="logo-word">
-            <span class="logo-letter" style="--index:0;" data-letter="L">L</span>
-            <span class="logo-letter" style="--index:1;" data-letter="K">K</span>
-            <span class="logo-letter" style="--index:2;" data-letter="Z">Z</span>
-            <span class="logo-letter" style="--index:3; margin-left: 20px;" data-letter="H">H</span>
-            <span class="logo-letter" style="--index:4;" data-letter="U">U</span>
-            <span class="logo-letter" style="--index:5;" data-letter="B">B</span>
-        </div>
-        <div class="loader-text-status"></div>
-    </div>
     <header class="loaded">
         <div class="logo" data-key="logo">LKZ Hub</div>
         <nav>
@@ -769,6 +734,11 @@
                     <h2 data-key="todayExecutionsTitle">Execuções de Hoje</h2>
                     <span class="counter-value" id="views-count">0</span>
                 </div>
+                <div class="counter-card">
+                    <h2 data-key="bestDayTitle">Melhor Dia</h2>
+                    <span class="counter-value" id="best-day-count">0</span>
+                    <p id="best-day-date" style="margin-top:5px; font-size: 0.9rem; color: var(--text-color); font-weight: 500;">--/--/----</p>
+                </div>
                 <div class="counter-card discord-card">
                     <div class="discord-header">
                         <img id="discord-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Server Icon">
@@ -806,7 +776,7 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 10/11/2025</li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 17/11/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="stealStatusDetail">Ativo</span></li>
                             <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="stealNotes">funcionando perfeitamente com várias funções para ajudar nos roubos.</span></li>
                         </ul>
@@ -838,7 +808,7 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 10/11/2025</li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 17/11/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="pvbStatusDetail">Ativo</span></li>
                             <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="pvbNotes">Ele ajuda no início do jogo, nada tão OP.</span></li>
                         </ul>
@@ -866,6 +836,7 @@
                 copyButton: 'Copiar Script',
                 totalExecutionsTitle: 'Execuções Totais',
                 todayExecutionsTitle: 'Execuções de Hoje',
+                bestDayTitle: 'Melhor Dia',
                 aboutHeading: 'Sobre o LKZ Hub',
                 aboutDescription: 'O LKZ Hub se dedica a fornecer scripts Roblox confiáveis, seguros e atualizados. Nossa missão é aprimorar sua experiência de jogo, oferecendo ferramentas práticas e funcionais, priorizando a segurança de sua conta e uma experiência de usuário impecável.',
                 futureDescription: 'Estamos empenhados em expandir nossa biblioteca de jogos e recursos suportados. Fique ligado para futuras atualizações.',
@@ -884,8 +855,7 @@
                 pvbNotes: 'Ele ajuda no início do jogo, nada tão OP.',
                 footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
                 discordTitle: 'Nosso Discord',
-                discordJoinButton: 'Entrar no Servidor',
-                loaderStatus: 'CARREGANDO... AGUARDE.'
+                discordJoinButton: 'Entrar no Servidor'
             },
             'en': {
                 logo: 'LKZ Hub',
@@ -901,6 +871,7 @@
                 copyButton: 'Copy Script',
                 totalExecutionsTitle: 'Total Executions',
                 todayExecutionsTitle: 'Today\'s Executions',
+                bestDayTitle: 'Best Day',
                 aboutHeading: 'About LKZ Hub',
                 aboutDescription: 'LKZ Hub is dedicated to providing reliable, secure, and regularly updated Roblox scripts. Our mission is to enhance your gaming experience by offering practical and functional tools while prioritizing your account safety and a seamless user experience.',
                 futureDescription: 'We are committed to expanding our library of supported games and features. Stay tuned for upcoming updates.',
@@ -919,8 +890,7 @@
                 pvbNotes: 'It helps at the beginning of the game, nothing too OP.',
                 footerText: 'LKZ Hub © 2025 — All Rights Reserved',
                 discordTitle: 'Our Discord',
-                discordJoinButton: 'Join Server',
-                loaderStatus: 'LOADING... PLEASE WAIT.'
+                discordJoinButton: 'Join Server'
             }
         };
         
@@ -934,15 +904,10 @@
                     element.innerHTML = currentTranslations[key];
                 }
             });
-            const loaderText = document.querySelector('.loader-text-status');
-            if (loaderText) {
-                loaderText.textContent = currentTranslations.loaderStatus;
-            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             applyTranslations(userLang);
-            
         });
         
         const tabButtons = document.querySelectorAll('.tab-btn');
@@ -1020,26 +985,40 @@
 
         let firstLoad = true;
 
+        function formatDate(dateString) {
+            if (!dateString) return "--/--/----";
+            const parts = dateString.split('-');
+            if (parts.length !== 3) return dateString;
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
         function setupCounters() {
-            Promise.all([
-                fetch('https://api.counterapi.dev/v2/lkz/lkz-hub').then(r => r.json()),
-                fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
-            ]).then(([totalData, todayData]) => {
-                const totalExecutions = Math.round(totalData.data.up_count / 2);
-                const todayExecutions = Math.floor(todayData.data.stats.today.up / 2);
+            fetch('https://counter.lucasemanuelguimaraes20.workers.dev/stats')
+            .then(r => r.json())
+            .then(data => {
+                const totalExecutions = data.total;
+                const todayExecutions = data.daily;
+                const bestDayCount = data.best_day.count;
+                const bestDayDate = formatDate(data.best_day.date);
                 
                 if (firstLoad) {
                     animateCounter('execBtn', totalExecutions, 1500);
                     animateCounter('views-count', todayExecutions, 1500);
+                    animateCounter('best-day-count', bestDayCount, 1500);
+                    document.getElementById('best-day-date').textContent = bestDayDate;
                     firstLoad = false;
                 } else {
                     document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
                     document.getElementById('views-count').textContent = todayExecutions.toLocaleString(userLang);
+                    document.getElementById('best-day-count').textContent = bestDayCount.toLocaleString(userLang);
+                    document.getElementById('best-day-date').textContent = bestDayDate;
                 }
 
             }).catch(() => {
                 document.getElementById('execBtn').textContent = '?';
                 document.getElementById('views-count').textContent = '?';
+                document.getElementById('best-day-count').textContent = '?';
+                document.getElementById('best-day-date').textContent = '--/--/----';
             });
         }
         
