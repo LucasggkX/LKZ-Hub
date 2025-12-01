@@ -17,6 +17,8 @@ elseif id == 109983668079237 or id == 128762245270197 or id == 96342491571673 th
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Steal%20a%20brainrot.lua"
 elseif id == 127742093697776 then
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Plant%20vs.lua"
+elseif id == 537413528 then
+    raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Build%20a%20Boat.lua"
 else
     return 
 end
