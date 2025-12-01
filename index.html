@@ -439,7 +439,7 @@
             margin-right: 5px;
         }
         
-        .game-details .status-indicator.active { background-color: var(--primary-color); box-shadow: 0 0 5px var(--primary-color); }
+        .game-details .status-indicator.active { background-color: var(--secondary-color); box-shadow: 0 0 5px var(--secondary-color); }
         .game-details .status-indicator.inactive { background-color: #dc3545; box-shadow: 0 0 5px #dc3545; }
         .game-details .status-indicator.beta { background-color: #ffc107; box-shadow: 0 0 5px #ffc107; }
         
@@ -713,24 +713,6 @@
     </style>
 </head>
 <body>
-    <div class="loader-container">
-        <div class="background-lines">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-        <div class="logo-word">
-            <span class="logo-letter" style="--index:0;" data-letter="L">L</span>
-            <span class="logo-letter" style="--index:1;" data-letter="K">K</span>
-            <span class="logo-letter" style="--index:2;" data-letter="Z">Z</span>
-            <span class="logo-letter" style="--index:3; margin-left: 20px;" data-letter="H">H</span>
-            <span class="logo-letter" style="--index:4;" data-letter="U">U</span>
-            <span class="logo-letter" style="--index:5;" data-letter="B">B</span>
-        </div>
-        <div class="loader-text-status"></div>
-    </div>
     <header class="loaded">
         <div class="logo" data-key="logo">LKZ Hub</div>
         <nav>
@@ -752,7 +734,7 @@
                             <li data-key="stealStatus"><span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Ativo</li>
                             <li data-key="nightsStatus"><span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Ativo</li>
                             <li data-key="pvbStatus"><span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Ativo</li>
-                            <li data-key="losStatus"><span class="status-indicator"></span> <strong>Legends of Speed</strong> — Ativo</li>
+                            <li data-key="legendsStatus"><span class="status-indicator"></span> <strong>Legends of Speed</strong> — Ativo</li>
                             <li data-key="babftStatus"><span class="status-indicator"></span> <strong>Build a Boat For Treasure</strong> — Ativo</li>
                         </ul>
                     </div>
@@ -808,9 +790,9 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> <span data-key="stealUpdateDate">01/12/2025</span></li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 01/12/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="stealStatusDetail">Ativo</span></li>
-                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="stealNotes">Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="stealNotes">Funcionando perfeitamente com diversas funções de auto farm, teleporte e outras ferramentas úteis para otimizar seus roubos.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -824,9 +806,9 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> <span data-key="nightsUpdateDate">01/12/2025</span></li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 10/11/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="nightsStatusDetail">Ativo</span></li>
-                            <li><strong><span data-key="notesLabel">Notas:</strong> <span data-key="nightsNotes">Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="nightsNotes">Funcionando perfeitamente com múltiplas funcionalidades de sobrevivência e progressão automática.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -840,9 +822,9 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> <span data-key="pvbUpdateDate">01/12/2025</span></li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 10/11/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="pvbStatusDetail">Ativo</span></li>
-                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="pvbNotes">Ele ajuda no início do jogo, nada tão OP.</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="pvbNotes">Auxilia no início do jogo com recursos balanceados para melhor experiência.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -856,9 +838,9 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> <span data-key="losUpdateDate">01/12/2025</span></li>
-                            <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="losStatusDetail">Ativo</span></li>
-                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="losNotes">Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.</span></li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 01/12/2025</li>
+                            <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="legendsStatusDetail">Ativo</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="legendsNotes">Funcionando com recursos de auto farm, coleta automática de orbs e aumento de velocidade para progressão rápida.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -872,9 +854,9 @@
                     </div>
                     <div class="game-details">
                         <ul>
-                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> <span data-key="babftUpdateDate">01/12/2025</span></li>
+                            <li><strong><span data-key="lastUpdateLabel">Última atualização:</span></strong> 01/12/2025</li>
                             <li><strong><span data-key="scriptStatusLabel">Status do script:</span></strong> <span class="status-indicator active"></span> <span data-key="babftStatusDetail">Ativo</span></li>
-                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="babftNotes">Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.</span></li>
+                            <li><strong><span data-key="notesLabel">Notas:</span></strong> <span data-key="babftNotes">Funcionando com auto farm de ouro, teleporte entre ilhas e ferramentas de construção automatizada.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -897,7 +879,7 @@
                 stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Ativo',
                 nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Ativo',
                 pvbStatus: '<span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Ativo',
-                losStatus: '<span class="status-indicator"></span> <strong>Legends of Speed</strong> — Ativo',
+                legendsStatus: '<span class="status-indicator"></span> <strong>Legends of Speed</strong> — Ativo',
                 babftStatus: '<span class="status-indicator"></span> <strong>Build a Boat For Treasure</strong> — Ativo',
                 copyButton: 'Copiar Script',
                 totalExecutionsTitle: 'Execuções Totais',
@@ -912,25 +894,16 @@
                 lastUpdateLabel: 'Última atualização:',
                 scriptStatusLabel: 'Status do script:',
                 notesLabel: 'Notas:',
-                
-                stealUpdateDate: '01/12/2025',
-                nightsUpdateDate: '01/12/2025',
-                pvbUpdateDate: '01/12/2025',
-                losUpdateDate: '01/12/2025',
-                babftUpdateDate: '01/12/2025',
-
                 stealStatusDetail: 'Ativo',
                 nightsStatusDetail: 'Ativo',
                 pvbStatusDetail: 'Ativo',
-                losStatusDetail: 'Ativo',
+                legendsStatusDetail: 'Ativo',
                 babftStatusDetail: 'Ativo',
-                
-                stealNotes: 'Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.',
-                nightsNotes: 'Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.',
-                pvbNotes: 'Ele ajuda no início do jogo, nada tão OP.',
-                losNotes: 'Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.',
-                babftNotes: 'Funciona perfeitamente com funções de auto farm, teleporte, e outros recursos exclusivos para domínio total do jogo.',
-
+                stealNotes: 'Funcionando perfeitamente com diversas funções de auto farm, teleporte e outras ferramentas úteis para otimizar seus roubos.',
+                nightsNotes: 'Funcionando perfeitamente com múltiplas funcionalidades de sobrevivência e progressão automática.',
+                pvbNotes: 'Auxilia no início do jogo com recursos balanceados para melhor experiência.',
+                legendsNotes: 'Funcionando com recursos de auto farm, coleta automática de orbs e aumento de velocidade para progressão rápida.',
+                babftNotes: 'Funcionando com auto farm de ouro, teleporte entre ilhas e ferramentas de construção automatizada.',
                 footerText: 'LKZ Hub © 2025 — Todos os Direitos Reservados',
                 discordTitle: 'Nosso Discord',
                 discordJoinButton: 'Entrar no Servidor',
@@ -944,11 +917,10 @@
                 mainHeading: 'Main Script',
                 mainDescription: 'Access and execute the primary LKZ Hub script quickly and safely. Our loader provides secure, up-to-date scripts for a seamless gaming experience.',
                 mainScriptTitle: 'Script Status',
-                
                 stealStatus: '<span class="status-indicator"></span> <strong>Steal a Brainrot</strong> — Active',
                 nightsStatus: '<span class="status-indicator"></span> <strong>99 Nights in the Forest</strong> — Active',
                 pvbStatus: '<span class="status-indicator"></span> <strong>Plants vs Brainrot</strong> — Active',
-                losStatus: '<span class="status-indicator"></span> <strong>Legends of Speed</strong> — Active',
+                legendsStatus: '<span class="status-indicator"></span> <strong>Legends of Speed</strong> — Active',
                 babftStatus: '<span class="status-indicator"></span> <strong>Build a Boat For Treasure</strong> — Active',
                 copyButton: 'Copy Script',
                 totalExecutionsTitle: 'Total Executions',
@@ -963,25 +935,16 @@
                 lastUpdateLabel: 'Last update:',
                 scriptStatusLabel: 'Script status:',
                 notesLabel: 'Notes:',
-
-                stealUpdateDate: '12/01/2025',
-                nightsUpdateDate: '12/01/2025',
-                pvbUpdateDate: '12/01/2025',
-                losUpdateDate: '12/01/2025',
-                babftUpdateDate: '12/01/2025',
-
                 stealStatusDetail: 'Active',
                 nightsStatusDetail: 'Active',
                 pvbStatusDetail: 'Active',
-                losStatusDetail: 'Active',
+                legendsStatusDetail: 'Active',
                 babftStatusDetail: 'Active',
-                
-                stealNotes: 'Works perfectly with auto farm functions, teleportation, and other exclusive features for total game dominance.',
-                nightsNotes: 'Works perfectly with auto farm functions, teleportation, and other exclusive features for total game dominance.',
-                pvbNotes: 'It helps at the beginning of the game, nothing too OP.',
-                losNotes: 'Works perfectly with auto farm functions, teleportation, and other exclusive features for total game dominance.',
-                babftNotes: 'Works perfectly with auto farm functions, teleportation, and other exclusive features for total game dominance.',
-
+                stealNotes: 'Working perfectly with various auto farm functions, teleportation and other useful tools to optimize your robberies.',
+                nightsNotes: 'Working perfectly with multiple survival and automatic progression features.',
+                pvbNotes: 'Helps at the beginning of the game with balanced resources for better experience.',
+                legendsNotes: 'Working with auto farm features, automatic orb collection and speed boost for rapid progression.',
+                babftNotes: 'Working with auto gold farm, island teleportation and automated building tools.',
                 footerText: 'LKZ Hub © 2025 — All Rights Reserved',
                 discordTitle: 'Our Discord',
                 discordJoinButton: 'Join Server',
@@ -992,10 +955,10 @@
         const userLang = navigator.language.startsWith('pt') ? 'pt-BR' : 'en';
 
         function applyTranslations(lang) {
-            const currentTranslations = translations[lang] || translations['pt-BR'];
+            const currentTranslations = translations[lang] || translations['en'];
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.dataset.key;
-                if (currentTranslations[key] !== undefined) {
+                if (currentTranslations[key]) {
                     element.innerHTML = currentTranslations[key];
                 }
             });
@@ -1007,7 +970,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             applyTranslations(userLang);
-            
         });
         
         const tabButtons = document.querySelectorAll('.tab-btn');
@@ -1016,13 +978,10 @@
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if(btn.id === 'theme-switcher-btn') return;
-                
                 const target = btn.dataset.tab;
-                
                 tabButtons.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
                 btn.classList.add('active');
+                tabContents.forEach(c => c.classList.remove('active'));
                 document.getElementById(target).classList.add('active');
             });
         });
@@ -1031,9 +990,7 @@
             btn.addEventListener('click', () => {
                 const code = btn.closest('.script-container').querySelector('pre code').textContent;
                 navigator.clipboard.writeText(code.trim());
-                
-                const originalText = translations[userLang]['copyButton']; 
-                
+                const originalText = translations[userLang].copyButton;
                 btn.innerText = userLang === 'pt-BR' ? 'Copiado! ✅' : 'Copied! ✅';
                 setTimeout(() => btn.innerText = originalText, 2000);
             });
@@ -1042,26 +999,17 @@
         document.querySelectorAll('.toggle-details').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                const gameItem = btn.closest('.game-item');
-                const details = gameItem.querySelector('.game-details');
+                const details = btn.closest('.game-item').querySelector('.game-details');
                 const isActive = details.classList.contains('active');
-                
                 const openText = translations[userLang].openStatusBtn;
                 const closeText = translations[userLang].closeStatusBtn;
 
-                document.querySelectorAll('.game-details').forEach(d => {
-                    if (d !== details) {
-                        d.classList.remove('active');
-                        d.closest('.game-item').querySelector('.toggle-details').innerText = openText;
-                    }
-                });
+                document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
+                document.querySelectorAll('.toggle-details').forEach(b => b.innerText = openText);
                 
                 if (!isActive) {
                     details.classList.add('active');
                     btn.innerText = closeText;
-                } else {
-                    details.classList.remove('active');
-                    btn.innerText = openText;
                 }
             });
         });
@@ -1080,8 +1028,6 @@
             const startValue = 0;
             let startTime;
 
-            const formatter = new Intl.NumberFormat(userLang, { maximumFractionDigits: 0 });
-
             function step(timestamp) {
                 if (!startTime) startTime = timestamp;
                 const elapsed = timestamp - startTime;
@@ -1089,7 +1035,7 @@
                 
                 const currentValue = Math.floor(startValue + (finalValue - startValue) * progress);
 
-                element.textContent = formatter.format(currentValue);
+                element.textContent = currentValue.toLocaleString(userLang);
 
                 if (progress < 1) {
                     requestAnimationFrame(step);
@@ -1100,32 +1046,25 @@
         }
 
         let firstLoad = true;
-        let lastTotal = 0;
-        let lastToday = 0;
 
         function setupCounters() {
             Promise.all([
                 fetch('https://api.counterapi.dev/v2/lkz/lkz-hub').then(r => r.json()),
                 fetch("https://api.counterapi.dev/v2/lkz/lkz-hub/stats").then(r => r.json())
             ]).then(([totalData, todayData]) => {
-                const totalExecutions = Math.round(totalData.value || 0);
-                const todayExecutions = Math.floor(todayData.value_today || 0);
-
+                const totalExecutions = Math.round(totalData.data.up_count / 2);
+                const todayExecutions = Math.floor(todayData.data.stats.today.up / 2);
+                
                 if (firstLoad) {
                     animateCounter('execBtn', totalExecutions, 1500);
                     animateCounter('views-count', todayExecutions, 1500);
-                    lastTotal = totalExecutions;
-                    lastToday = todayExecutions;
                     firstLoad = false;
-                } else if (totalExecutions !== lastTotal || todayExecutions !== lastToday) {
-                    document.getElementById('execBtn').textContent = new Intl.NumberFormat(userLang).format(totalExecutions);
-                    document.getElementById('views-count').textContent = new Intl.NumberFormat(userLang).format(todayExecutions);
-                    
-                    lastTotal = totalExecutions;
-                    lastToday = todayExecutions;
+                } else {
+                    document.getElementById('execBtn').textContent = totalExecutions.toLocaleString(userLang);
+                    document.getElementById('views-count').textContent = todayExecutions.toLocaleString(userLang);
                 }
+
             }).catch(() => {
-                console.error("Erro ao buscar contadores.");
                 document.getElementById('execBtn').textContent = '?';
                 document.getElementById('views-count').textContent = '?';
             });
@@ -1135,49 +1074,33 @@
             const inviteCode = "lkzhub";
             const apiURL = `https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`;
             try {
-                
-                const d = {
-                    guild: {
-                        id: "1234567890",
-                        name: "LKZ HUB Oficial",
-                        icon: "a_discord_icon_hash_simulated"
-                    },
-                    approximate_member_count: 5500,
-                    approximate_presence_count: 850
-                };
+                const r = await fetch(apiURL);
+                const d = await r.json();
 
                 if (d.guild) {
-                
-                const discordIconURL = "https://cdn.discordapp.com/icons/1118683525287518298/a_d78f24b584a56a635848520779893963.png?size=128";
-                document.getElementById("discord-icon").src = discordIconURL;
-                
+                const icon = d.guild.icon 
+                    ? `https://cdn.discordapp.com/icons/${d.guild.id}/${d.guild.icon}.png?size=128`
+                    : "https://cdn.discordapp.com/embed/avatars/0.png";
+                document.getElementById("discord-icon").src = icon;
                 document.getElementById("server-name").innerText = d.guild.name;
                 
-                const memberCountText = userLang === 'pt-BR' 
-                    ? `👥 Membros: ${d.approximate_member_count.toLocaleString(userLang)}` 
-                    : `👥 Members: ${d.approximate_member_count.toLocaleString('en-US')}`;
-                
-                const onlineCountText = userLang === 'pt-BR' 
-                    ? `🟢 Online: ${d.approximate_presence_count.toLocaleString(userLang)}` 
-                    : `🟢 Online: ${d.approximate_presence_count.toLocaleString('en-US')}`;
+                const memberCountText = userLang === 'pt-BR' ? `👥 Membros: ${d.approximate_member_count.toLocaleString(userLang)}` : `👥 Members: ${d.approximate_member_count.toLocaleString(userLang)}`;
+                const onlineCountText = userLang === 'pt-BR' ? `🟢 Online: ${d.approximate_presence_count.toLocaleString(userLang)}` : `🟢 Online: ${d.approximate_presence_count.toLocaleString(userLang)}`;
                 
                 document.getElementById("member-count").innerText = memberCountText;
                 document.getElementById("online-count").innerText = onlineCountText;
                 } else {
-                    document.getElementById("server-name").innerText = userLang === 'pt-BR' ? "Erro ao carregar" : "Error loading";
+                document.getElementById("server-name").innerText = userLang === 'pt-BR' ? "Erro ao carregar" : "Error loading";
                 }
-            } catch (error) {
-                console.error("Erro ao atualizar Discord:", error);
+            } catch {
                 document.getElementById("server-name").innerText = userLang === 'pt-BR' ? "Falha na conexão" : "Connection failed";
-                document.getElementById("member-count").innerText = userLang === 'pt-BR' ? "Membros: ?" : "Members: ?";
-                document.getElementById("online-count").innerText = userLang === 'pt-BR' ? "Online: ?" : "Online: ?";
             }
         }
 
         setupCounters();
         atualizarDiscord();
-        setInterval(setupCounters, 5000);
-        setInterval(atualizarDiscord, 30000);
+        setInterval(setupCounters, 2000); 
+        setInterval(atualizarDiscord, 2000); 
     </script>
 </body>
 </html>
