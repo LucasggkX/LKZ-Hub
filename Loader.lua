@@ -10,6 +10,7 @@ if id == 126509999114328 then
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/99%20Nights.lua"
 elseif id == 109983668079237 or id == 128762245270197 or id == 96342491571673 then  
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Steal%20a%20brainrot.lua"
+    if not hookfunction then game:GetService("Players").LocalPlayer:Kick("Hookfunction Not supported in: "..tostring((identifyexecutor and identifyexecutor()) or (getexecutorname and getexecutorname()) or "Unknown")) end
 elseif id == 127742093697776 then
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Plant%20vs.lua"
 elseif id == 537413528 then
