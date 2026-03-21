@@ -1,4 +1,4 @@
-local needverify = false
+local needverify = true
 
 function safeload(url)
   task.spawn(function()
