@@ -16,6 +16,8 @@ elseif id == 537413528 then
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Build%20a%20Boat.lua"
 elseif id == 3101667897 then
     raw = "https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Legends%20of%20speed.lua"
+elseif id == 107778070777162 then
+    raw = "https://api.luarmor.net/files/v4/loaders/65bf3459d87ba3ac46350e154b640929.lua"
 else
     return 
 end
